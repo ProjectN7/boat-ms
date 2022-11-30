@@ -17,7 +17,7 @@ public interface BoatRepository extends JpaRepository<Boat, String> {
     @Query(value = "SELECT  b.licencePlate " + "FROM Boat b " + "WHERE b.licencePlate = ?1")
     String licencePlateExist(String licencePlate);
 
-    @Query("SELECT b.licence_plate FROM Boat b")
+    @Query("SELECT b.licencePlate FROM Boat b")
     List<String> getAllBoat();
 
 
