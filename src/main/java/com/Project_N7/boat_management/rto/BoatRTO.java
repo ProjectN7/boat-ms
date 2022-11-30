@@ -1,27 +1,27 @@
 package com.Project_N7.boat_management.rto;
 
 public class BoatRTO {
-    private String licence_plate;
+    private String licencePlate;
 
     private String cf;
     private String name;
     private String colour;
-    private String navigation_licence;
+    private String navigationLicence;
     private String power;
-    private String declaration_of_conformity;
+    private String declarationOfConformity;
     private String rca;
 
     public BoatRTO() { super(); }
 
-    public BoatRTO(String licence_plate, String cf, String name, String colour, String navigation_licence, String power,
-                   String declaration_of_conformity, String rca) {
-        this.licence_plate = licence_plate;
+    public BoatRTO(String licencePlate, String cf, String name, String colour, String navigationLicence, String power,
+                   String declarationOfConformity, String rca) {
+        this.licencePlate = licencePlate;
         this.cf = cf;
         this.name = name;
         this.colour = colour;
-        this.navigation_licence = navigation_licence;
+        this.navigationLicence = navigationLicence;
         this.power = power;
-        this.declaration_of_conformity = declaration_of_conformity;
+        this.declarationOfConformity = declarationOfConformity;
         this.rca = rca;
     }
 
@@ -34,11 +34,11 @@ public class BoatRTO {
     }
 
     public String getLicencePlate() {
-        return licence_plate;
+        return licencePlate;
     }
 
     public void setLicencePlate(String licence_plate) {
-        this.licence_plate = licence_plate;
+        this.licencePlate = licence_plate;
     }
 
     public String getName() {
@@ -57,12 +57,12 @@ public class BoatRTO {
         this.colour = colour;
     }
 
-    public String getNavigation_licence() {
-        return navigation_licence;
+    public String getNavigationLicence() {
+        return navigationLicence;
     }
 
-    public void setNavigation_licence(String navigation_licence) {
-        this.navigation_licence = navigation_licence;
+    public void setNavigationLicence(String navigationLicence) {
+        this.navigationLicence = navigationLicence;
     }
 
     public String getPower() {
@@ -73,12 +73,12 @@ public class BoatRTO {
         this.power = power;
     }
 
-    public String getDeclaration_of_conformity() {
-        return declaration_of_conformity;
+    public String getDeclarationOfConformity() {
+        return declarationOfConformity;
     }
 
-    public void setDeclaration_of_conformity(String declaration_of_conformity) {
-        this.declaration_of_conformity = declaration_of_conformity;
+    public void setDeclarationOfConformity(String declarationOfConformity) {
+        this.declarationOfConformity = declarationOfConformity;
     }
 
     public String getRca() {
@@ -90,9 +90,9 @@ public class BoatRTO {
     }
 
     public String toString() {
-        return " \"Plate\": \"" + licence_plate + "\",\n \"Name\": \"" + name + "\",\n \"Color\": \"" + colour
-                + ",\"\n \"Navigation licence\": \"" + navigation_licence + "\",\n \"Power\": \"" + power
-                + "\", \n \"Declaration of conformity\": \"" + declaration_of_conformity + "\", \n \"rca\": \"" + rca
+        return " \"Plate\": \"" + licencePlate + "\",\n \"Name\": \"" + name + "\",\n \"Color\": \"" + colour
+                + ",\"\n \"Navigation licence\": \"" + navigationLicence + "\",\n \"Power\": \"" + power
+                + "\", \n \"Declaration of conformity\": \"" + declarationOfConformity + "\", \n \"rca\": \"" + rca
                 + "\",";
     }
 }

@@ -6,15 +6,15 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class BoatCompletaRTO extends BoatRTO {
 
     @JsonIgnore
-    private String licence_plate;
+    private String licencePlate;
 
     public BoatCompletaRTO() { super(); }
 
-    public String getLicence_plate() {
-        return licence_plate;
+    public String getLicencePlate() {
+        return licencePlate;
     }
 
-    public void setLicence_plate(String licence_plate) {
-        this.licence_plate = licence_plate;
+    public void setLicencePlate(String licencePlate) {
+        this.licencePlate = licencePlate;
     }
 }

@@ -6,7 +6,7 @@ import javax.validation.constraints.Pattern;
 public class BoatTO {
     @NotBlank(message = "La targa non può essere nulla o vuota")
     @Pattern(regexp = "^[A-Z]{2}-[0-9]{5}$", message = "La targa non può contenere caratteri speciali o non seguire la forma XX00000")
-    private String licence_plate;
+    private String licencePlate;
 
     @NotBlank(message = "Il codice fiscale non può essere nullo o vuoto")
     @Pattern(regexp = "[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]", message = "Codice fiscale non valido")
@@ -19,7 +19,7 @@ public class BoatTO {
 
     @NotBlank(message = "La licenza di navigazione non può essere nulla o vuota")
     @Pattern(regexp = "^[A-Z]{2}-[0-9]{4}$", message = "La licenza di navigazione non può contenere caratteri speciali o non seguire la forma XX0000")
-    private String navigation_licence;
+    private String navigationLicence;
 
     @NotBlank(message = "La potenza non può essere nulla o vuota")
     @Pattern(regexp = "^[0-9]{3}$", message = "La potenza non può contenere caratteri speciali o lettere")
@@ -27,7 +27,7 @@ public class BoatTO {
 
     @NotBlank(message = "La dichiarazione di conformità non può essere nulla o vuota")
     @Pattern(regexp = "^[A-Z]{6}-[0-9]{3}$", message = "La dichiarazione di conformità non può contenere caratteri speciali o non seguire la forma XXXXXX000")
-    private String declaration_of_conformity;
+    private String declarationOfConformity;
 
     @NotBlank(message = "L 'RCA non può essere nulla o vuota")
     @Pattern(regexp = "^[A-Z]{2}-[0-9]{3}$", message = "LL 'RCA non può contenere caratteri speciali o non seguire la forma XX000")
@@ -35,14 +35,14 @@ public class BoatTO {
 
     public BoatTO() { super(); }
 
-    public BoatTO(String licence_plate, String name, String colour, String navigation_licence, String power,
-                  String declaration_of_conformity, String rca) {
-        this.licence_plate = licence_plate;
+    public BoatTO(String licencePlate, String name, String colour, String navigationLicence, String power,
+                  String declarationOfConformity, String rca) {
+        this.licencePlate = licencePlate;
         this.name = name;
         this.colour = colour;
-        this.navigation_licence = navigation_licence;
+        this.navigationLicence = navigationLicence;
         this.power = power;
-        this.declaration_of_conformity = declaration_of_conformity;
+        this.declarationOfConformity = declarationOfConformity;
         this.rca = rca;
     }
 
@@ -50,12 +50,12 @@ public class BoatTO {
 
     public void setCf(String cf) { this.cf = cf; }
 
-    public String getLicence_plate() {
-        return licence_plate;
+    public String getLicencePlate() {
+        return licencePlate;
     }
 
-    public void setLicence_plate(String licence_plate) {
-        this.licence_plate = licence_plate;
+    public void setLicencePlate(String licencePlate) {
+        this.licencePlate = licencePlate;
     }
 
     public String getName() {
@@ -74,12 +74,12 @@ public class BoatTO {
         this.colour = colour;
     }
 
-    public String getNavigation_licence() {
-        return navigation_licence;
+    public String getNavigationLicence() {
+        return navigationLicence;
     }
 
-    public void setNavigation_licence(String navigation_licence) {
-        this.navigation_licence = navigation_licence;
+    public void setNavigationLicence(String navigationLicence) {
+        this.navigationLicence = navigationLicence;
     }
 
     public String getPower() {
@@ -90,12 +90,12 @@ public class BoatTO {
         this.power = power;
     }
 
-    public String getDeclaration_of_conformity() {
-        return declaration_of_conformity;
+    public String getDeclarationOfConformity() {
+        return declarationOfConformity;
     }
 
-    public void setDeclaration_of_conformity(String declaration_of_conformity) {
-        this.declaration_of_conformity = declaration_of_conformity;
+    public void setDeclarationOfConformity(String declarationOfConformity) {
+        this.declarationOfConformity = declarationOfConformity;
     }
 
     public String getRca() {

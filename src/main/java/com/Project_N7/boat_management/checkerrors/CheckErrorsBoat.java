@@ -1,5 +1,4 @@
 package com.Project_N7.boat_management.checkerrors;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -74,7 +73,7 @@ public class CheckErrorsBoat {
             errorRtoList.add(new ErrorRTO("Colour", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getNavigation_licence() != null && !boatToModifyTO.getNavigation_licence().matches("^[A-Z]{2}-[0-9]{4}$")) {
+        if (boatToModifyTO.getNavigationLicence() != null && !boatToModifyTO.getNavigationLicence().matches("^[A-Z]{2}-[0-9]{4}$")) {
             errorRtoList.add(new ErrorRTO("Navigation Licence", "Campo non valido"));
         }
 
@@ -82,8 +81,8 @@ public class CheckErrorsBoat {
             errorRtoList.add(new ErrorRTO("Power", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getDeclaration_of_conformity() != null
-                && !boatToModifyTO.getDeclaration_of_conformity().matches("^[A-Z]{6}-[0-9]{3}$")) {
+        if (boatToModifyTO.getDeclarationOfConformity() != null
+                && !boatToModifyTO.getDeclarationOfConformity().matches("^[A-Z]{6}-[0-9]{3}$")) {
             errorRtoList.add(new ErrorRTO("Declaration of conformity", "Campo non valido"));
         }
 

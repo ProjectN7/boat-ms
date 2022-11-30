@@ -1,4 +1,5 @@
 package com.Project_N7.boat_management.facade;
+import com.Project_N7.boat_management.entity.Risposta;
 import com.Project_N7.boat_management.exception.LicencePlateException;
 import com.Project_N7.boat_management.rto.BoatCompletaRTO;
 import com.Project_N7.boat_management.rto.BoatRTO;
@@ -16,26 +17,31 @@ public class BoatFacade {
     @Autowired
     BoatService boatService;
 
-    public List<BoatRTO> getBoatByLicencePlate(String licence_plate) throws LicencePlateException {
-        if (!boatService.licencePlateExist(licence_plate)) { // Prima chiamata al server per vedere se il
+    public BoatRTO getBoatByLicencePlate(String licencePlate) throws LicencePlateException {
+        if (!boatService.licencePlateExist(licencePlate)) { // Prima chiamata al server per vedere se il
             // la targa esiste
             throw new LicencePlateException("targa non presente"); // Altrimenti lancio l'eccezione
         }
         // Se il numero è presente vado a cercarmi le persone che lo posseggono
-        return boatService.getBoatByLicencePlate(licence_plate);
+        return boatService.getBoatByLicencePlate(licencePlate);
     }
 
-    public String boatSave(BoatTO boatTO) {
+    public Object boatSave(BoatTO boatTO) {
         String licence_plate = boatService.boatSave(boatTO);
         if (licence_plate != null) {
-            return "La barca con la targa: " + licence_plate + "è stata aggiunta";
+            Risposta risp = new Risposta();
+            risp.setResponse("La barca con la targa: " + licence_plate + " è stata aggiunta");
+            return risp;
         }
 
         return "La barca non è stata inserita";
     }
 
-    public BoatCompletaRTO modificaBoat(String licence_plate, BoatToModifyTo boatToModifyTO) {
-        return boatService.modificaBoat(licence_plate, boatToModifyTO);
+    public BoatCompletaRTO modificaBoat(String licencePlate, BoatToModifyTo boatToModifyTO) {
+        return boatService.modificaBoat(licencePlate, boatToModifyTO);
     }
+
+    public List<String> getAllBoat() throws LicencePlateException { return boatService.getAllBoat(); }
+
 
 }

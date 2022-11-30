@@ -6,23 +6,23 @@ public class BoatToModifyTo {
 
     private String colour;
 
-    private String navigation_licence;
+    private String navigationLicence;
 
     private String power;
 
-    private String declaration_of_conformity;
+    private String declarationOfConformity;
 
     private String rca;
 
     public BoatToModifyTo() { super(); }
 
-    public BoatToModifyTo(String name, String colour, String navigation_licence,
-                          String power, String declaration_of_conformity, String rca) {
+    public BoatToModifyTo(String name, String colour, String navigationLicence,
+                          String power, String declarationOfConformity, String rca) {
         this.name = name;
         this.colour = colour;
-        this.navigation_licence = navigation_licence;
+        this.navigationLicence = navigationLicence;
         this.power = power;
-        this.declaration_of_conformity = declaration_of_conformity;
+        this.declarationOfConformity = declarationOfConformity;
         this.rca = rca;
     }
 
@@ -42,12 +42,12 @@ public class BoatToModifyTo {
         this.colour = colour;
     }
 
-    public String getNavigation_licence() {
-        return navigation_licence;
+    public String getNavigationLicence() {
+        return navigationLicence;
     }
 
-    public void setNavigation_licence(String navigation_licence) {
-        this.navigation_licence = navigation_licence;
+    public void setNavigationLicence(String navigationLicence) {
+        this.navigationLicence = navigationLicence;
     }
 
     public String getPower() {
@@ -58,12 +58,12 @@ public class BoatToModifyTo {
         this.power = power;
     }
 
-    public String getDeclaration_of_conformity() {
-        return declaration_of_conformity;
+    public String getDeclarationOfConformity() {
+        return declarationOfConformity;
     }
 
-    public void setDeclaration_of_conformity(String declaration_of_conformity) {
-        this.declaration_of_conformity = declaration_of_conformity;
+    public void setDeclarationOfConformity(String declarationOfConformity) {
+        this.declarationOfConformity = declarationOfConformity;
     }
 
     public String getRca() {

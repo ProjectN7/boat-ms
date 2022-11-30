@@ -17,66 +17,66 @@ import java.util.List;
 public class BoatService {
 
     @Autowired
-    private BoatRepository boat_repository;
+    private BoatRepository boatRepository;
 
-    public List<BoatRTO> getBoatByLicencePlate(String licence_plate) {
+    public BoatRTO getBoatByLicencePlate(String licence_plate) {
 
         // Chiamo il metodo trasferisciDaPersonaAPersonaRto per popolarla con i dati che
         // mi servono
-        return convertBoatTOBoatRTO(boat_repository.getBoatByLicencePlate(licence_plate));
+        return populateBoatRTO(boatRepository.getBoatByLicencePlate(licence_plate));
     }
 
-    public boolean licencePlateExist(String licence_plate) { return (boat_repository.findBoatFromLicencePlate(licence_plate) != null); }
+    public boolean licencePlateExist(String licence_plate) { return (boatRepository.getBoatByLicencePlate(licence_plate) != null); }
 
     public String boatSave(BoatTO boatTO) {
         Boat boat_to_save = new Boat();
-        boat_to_save.setLicence_plate(boatTO.getLicence_plate());
+        boat_to_save.setLicencePlate(boatTO.getLicencePlate());
         boat_to_save.setCf(boatTO.getCf());
         boat_to_save.setName(boatTO.getName());
         boat_to_save.setColour(boatTO.getColour());
-        boat_to_save.setNavigation_licence(boatTO.getNavigation_licence());
+        boat_to_save.setNavigationLicence(boatTO.getNavigationLicence());
         boat_to_save.setPower(boatTO.getPower());
-        boat_to_save.setDeclaration_of_conformity(boatTO.getDeclaration_of_conformity());
+        boat_to_save.setDeclarationOfConformity(boatTO.getDeclarationOfConformity());
         boat_to_save.setRca(boatTO.getRca());
-        return boat_repository.save(boat_to_save).getLicence_plate();
+        return boatRepository.save(boat_to_save).getLicencePlate();
     }
 
-    private List<BoatRTO> convertBoatTOBoatRTO(List<Boat> boat_list) {
+    private List<BoatRTO> convertBoatTOBoatRTO(List<Boat> boatList) {
 
         // Creo la lista di PersonaRTO
         List<BoatRTO> boatRTOList = new ArrayList<>();
         // Ciclo for per passare una ad una le persone dall'entità completa
         // all'oggetto custom RTO contenente solo le informazioni che vogliamo
-        for (Boat boat : boat_list) {
+        for (Boat boat : boatList) {
 
             // Creazione della PersonaRTO temporanea
-            BoatRTO boatRTO_temp = populateBoatRTO(boat);
+            BoatRTO boatRTOTemp = populateBoatRTO(boat);
 
             // Inserimento della PersonaRTO temporanea in nella lista di personeRto
-            boatRTOList.add(boatRTO_temp);
+            boatRTOList.add(boatRTOTemp);
         }
         return boatRTOList;
     }
 
     private BoatRTO populateBoatRTO(Boat boat) {
-        BoatRTO boatRTO_temp = new BoatRTO();
+        BoatRTO boatRTOTemp = new BoatRTO();
 
         // Popolamento tramite setter e getter
-        boatRTO_temp.setLicencePlate(boat.getLicence_plate());
-        boatRTO_temp.setCf(boat.getCf());
-        boatRTO_temp.setName(boat.getName());
-        boatRTO_temp.setColor(boat.getColour());
-        boatRTO_temp.setNavigation_licence(boat.getNavigation_licence());
-        boatRTO_temp.setPower(boat.getPower());
-        boatRTO_temp.setDeclaration_of_conformity(boat.getDeclaration_of_conformity());
-        boatRTO_temp.setRca(boat.getRca());
-        return boatRTO_temp;
+        boatRTOTemp.setLicencePlate(boat.getLicencePlate());
+        boatRTOTemp.setCf(boat.getCf());
+        boatRTOTemp.setName(boat.getName());
+        boatRTOTemp.setColor(boat.getColour());
+        boatRTOTemp.setNavigationLicence(boat.getNavigationLicence());
+        boatRTOTemp.setPower(boat.getPower());
+        boatRTOTemp.setDeclarationOfConformity(boat.getDeclarationOfConformity());
+        boatRTOTemp.setRca(boat.getRca());
+        return boatRTOTemp;
     }
 
     public BoatCompletaRTO modificaBoat(String licence_plate, BoatToModifyTo personaToModifyTO) {
-        Boat boatTemp = boat_repository.getById(licence_plate);
+        Boat boatTemp = boatRepository.getById(licence_plate);
         cambiaNotNull(boatTemp, personaToModifyTO);
-        return convertBoatToBoatCompletaRTO(boat_repository.save(boatTemp));
+        return convertBoatToBoatCompletaRTO(boatRepository.save(boatTemp));
 
     }
     public void cambiaNotNull(Boat boatTemp, BoatToModifyTo boatToModifyTO) {
@@ -85,13 +85,13 @@ public class BoatService {
         boatTemp.setColour(
                 boatToModifyTO.getColour() != null ? boatToModifyTO.getColour() : boatTemp.getColour());
         boatTemp
-                .setNavigation_licence(boatToModifyTO.getNavigation_licence() != null ? boatToModifyTO.getNavigation_licence() :
-                        boatTemp.getNavigation_licence());
+                .setNavigationLicence(boatToModifyTO.getNavigationLicence() != null ? boatToModifyTO.getNavigationLicence() :
+                        boatTemp.getNavigationLicence());
         boatTemp.setPower(boatToModifyTO.getPower() != null ? boatToModifyTO.getPower()
                 : boatTemp.getPower());
         boatTemp
-                .setDeclaration_of_conformity(boatToModifyTO.getDeclaration_of_conformity() != null ? boatToModifyTO.getDeclaration_of_conformity() :
-                        boatTemp.getDeclaration_of_conformity());
+                .setDeclarationOfConformity(boatToModifyTO.getDeclarationOfConformity() != null ? boatToModifyTO.getDeclarationOfConformity() :
+                        boatTemp.getDeclarationOfConformity());
         boatTemp.setRca(boatToModifyTO.getRca() != null ? boatToModifyTO.getRca()
                 : boatTemp.getRca());
     }
@@ -99,14 +99,16 @@ public class BoatService {
         BoatCompletaRTO boatCompletaRtoTemp = new BoatCompletaRTO();
 
         // Popolamento tramite setter e getter
-        boatCompletaRtoTemp.setLicence_plate(boat.getLicence_plate());
+        boatCompletaRtoTemp.setLicencePlate(boat.getLicencePlate());
         boatCompletaRtoTemp.setCf(boat.getCf());
         boatCompletaRtoTemp.setName(boat.getName());
         boatCompletaRtoTemp.setColor(boat.getColour());
-        boatCompletaRtoTemp.setNavigation_licence(boat.getNavigation_licence());
+        boatCompletaRtoTemp.setNavigationLicence(boat.getNavigationLicence());
         boatCompletaRtoTemp.setPower(boat.getPower());
-        boatCompletaRtoTemp.setDeclaration_of_conformity(boat.getDeclaration_of_conformity());
+        boatCompletaRtoTemp.setDeclarationOfConformity(boat.getDeclarationOfConformity());
         boatCompletaRtoTemp.setRca(boat.getRca());
         return boatCompletaRtoTemp;
     }
+
+    public List<String> getAllBoat() { return boatRepository.getAllBoat(); }
 }

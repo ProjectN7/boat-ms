@@ -9,40 +9,40 @@ public class LicencePlateException extends Exception {
 
     private static final long serialVersionUID = 1L;
 
-    private HttpStatus http_status;
+    private HttpStatus httpStatus;
 
-    private List<ErrorRTO> errorRTO_list;
+    private List<ErrorRTO> errorRTOList;
 
     public LicencePlateException() { super(); }
 
-    public LicencePlateException(List<ErrorRTO> errorRTO_list, HttpStatus http_status) {
+    public LicencePlateException(List<ErrorRTO> errorRTOList, HttpStatus httpStatus) {
         super();
-        this.errorRTO_list = errorRTO_list;
-        this.http_status = http_status;
+        this.errorRTOList = errorRTOList;
+        this.httpStatus = httpStatus;
     }
 
     public LicencePlateException(String message) {
         super(message);
     }
 
-    public LicencePlateException(String message, HttpStatus http_status) {
+    public LicencePlateException(String message, HttpStatus httpStatus) {
         super(message);
-        this.http_status = http_status;
+        this.httpStatus = httpStatus;
     }
 
-    public HttpStatus getHttp_status() {
-        return http_status;
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
     }
 
-    public void setHttp_status(HttpStatus http_status) {
-        this.http_status = http_status;
+    public void setHttpStatus(HttpStatus httpStatus) {
+        this.httpStatus = httpStatus;
     }
 
-    public List<ErrorRTO> getErrorRTO_list() {
-        return errorRTO_list;
+    public List<ErrorRTO> getErrorRTOList() {
+        return errorRTOList;
     }
 
-    public void setErrorRTO_list(List<ErrorRTO> errorRTO_list) {
-        this.errorRTO_list = errorRTO_list;
+    public void setErrorRTOList(List<ErrorRTO> errorRTOList) {
+        this.errorRTOList = errorRTOList;
     }
 }
