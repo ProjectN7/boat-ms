@@ -73,8 +73,8 @@ public class BoatService {
         return boatRTOTemp;
     }
 
-    public BoatCompletaRTO modificaBoat(String licence_plate, BoatToModifyTo personaToModifyTO) {
-        Boat boatTemp = boatRepository.getById(licence_plate);
+    public BoatCompletaRTO modificaBoat(String licencePlate, BoatToModifyTo personaToModifyTO) {
+        Boat boatTemp = boatRepository.getById(licencePlate);
         cambiaNotNull(boatTemp, personaToModifyTO);
         return convertBoatToBoatCompletaRTO(boatRepository.save(boatTemp));
 

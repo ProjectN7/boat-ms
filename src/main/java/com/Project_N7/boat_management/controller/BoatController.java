@@ -25,6 +25,7 @@ public class BoatController {
     @Autowired
     private CheckErrorsBoat errors;
 
+    @CrossOrigin
     @GetMapping(value = "/boat/boatList")
     public ResponseEntity<Object> getBoatFromLicencePlate(@RequestParam String licencePlate) {
         BoatRTO boatRTOs;
@@ -37,7 +38,7 @@ public class BoatController {
 
             return new ResponseEntity<>(boatRTOs,HttpStatus.OK);
         }
-
+    @CrossOrigin
     @PostMapping(value = "/boat/boatSave")
     public ResponseEntity<Object> boatSave(@Valid @RequestBody BoatTO boatTO){
         try {
@@ -47,9 +48,9 @@ public class BoatController {
         }
         return new ResponseEntity<>(boatFacade.boatSave(boatTO), HttpStatus.OK);
     }
-
-    @PostMapping(path = "/modificaBoat/{licence_plate}")
-    public ResponseEntity<Object> modificaBoat(@Valid @PathVariable("licence_plate") String licencePlate,
+    @CrossOrigin
+    @PostMapping(path = "/modificaBoat/{licencePlate}")
+    public ResponseEntity<Object> modificaBoat(@Valid @PathVariable("licencePlate") String licencePlate,
                                                @Valid @RequestBody BoatToModifyTo boatToModifyTO) {
 
         try {
@@ -64,7 +65,7 @@ public class BoatController {
         }
         return new ResponseEntity<>(boatFacade.modificaBoat(licencePlate, boatToModifyTO), HttpStatus.OK);
     }
-
+    @CrossOrigin
     @GetMapping(value = "/boat/boatAllList")
     public ResponseEntity<Object> getAllBoat() {
         List<String> boatRTOs;

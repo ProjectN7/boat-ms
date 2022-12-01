@@ -27,14 +27,14 @@ public class BoatFacade {
     }
 
     public Object boatSave(BoatTO boatTO) {
-        String licence_plate = boatService.boatSave(boatTO);
-        if (licence_plate != null) {
-            Risposta risp = new Risposta();
-            risp.setResponse("La barca con la targa: " + licence_plate + " è stata aggiunta");
+        String licencePlate = boatService.boatSave(boatTO);
+        Risposta risp = new Risposta();
+        if (licencePlate != null) {
+            risp.setResponse("La barca con la targa: " + licencePlate + " è stata aggiunta");
             return risp;
         }
-
-        return "La barca non è stata inserita";
+        risp.setResponse("La barca non è stata inserita");
+        return risp;
     }
 
     public BoatCompletaRTO modificaBoat(String licencePlate, BoatToModifyTo boatToModifyTO) {
