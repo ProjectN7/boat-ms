@@ -36,12 +36,12 @@ public class BoatFacade {
         risp.setResponse("La barca non è stata inserita");
         return risp;
     }
-
     public BoatCompletaRTO modificaBoat(String licencePlate, BoatToModifyTo boatToModifyTO) {
         return boatService.modificaBoat(licencePlate, boatToModifyTO);
     }
 
     public List<String> getAllBoat() throws LicencePlateException { return boatService.getAllBoat(); }
+
 
 
 }
