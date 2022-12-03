@@ -10,7 +10,7 @@ public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "IdReservation")
-    private Long IdReservation;
+    private Long idReservation;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "licence_plate", referencedColumnName = "licence_plate")
@@ -34,11 +34,11 @@ public class Reservation {
     public Reservation() { super(); }
 
     public Long getIdReservation() {
-        return IdReservation;
+        return idReservation;
     }
 
     public void setIdReservation(Long idReservation) {
-        IdReservation = idReservation;
+        idReservation = idReservation;
     }
 
     public Boat getBoat() {

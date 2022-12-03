@@ -3,25 +3,25 @@ package com.Project_N7.boat_management.entity;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Pier")
+@Table(name="pier")
 public class Pier {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IdPier")
-    private Long IdPier;
+    @Column(name = "ID_PIER")
+    private Integer idPier;
 
-    @Column(name = "name")
+    @Column(name = "NAME")
     private String name;
 
-    @Column(name = "Capacity")
+    @Column(name = "CAPACITY")
     private int capacity;
 
     public Pier() { super(); }
 
-    public Long getIdPier() { return IdPier; }
+    public Integer getIdPier() { return idPier; }
 
-    public void setIdPier(Long idPier) { IdPier = idPier; }
+    public void setIdPier(Integer idPier) { idPier = idPier; }
 
     public String getName() { return name; }
 

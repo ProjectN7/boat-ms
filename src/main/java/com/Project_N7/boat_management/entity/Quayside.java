@@ -19,27 +19,44 @@ public class Quayside {
     private String name;
 
     @Column(name = "is_active")
-    private Integer isActive;
+    private boolean isActive;
 
-    public Quayside() { super(); }
+    public Quayside() {
+        super();
+    }
 
-    public Long getIdQuayside() { return idQuayside; }
+    public Long getIdQuayside() {
+        return idQuayside;
+    }
 
-    public void setIdQuayside(Long idQuayside) { this.idQuayside = idQuayside; }
+    public void setIdQuayside(Long idQuayside) {
+        this.idQuayside = idQuayside;
+    }
 
-    public Pier getPier() { return pier; }
+    public Pier getPier() {
+        return pier;
+    }
 
-    public void setPier(Pier pier) { this.pier = pier; }
+    public void setPier(Pier pier) {
+        this.pier = pier;
+    }
 
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
-    public void setName(String name) { this.name = name; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
-    public Integer isActive() {
+    public boolean isActive() {
         return isActive;
     }
 
-    public void setActive(Integer active) {
+    public void setActive(boolean active) {
         isActive = active;
     }
+
 }
+
+

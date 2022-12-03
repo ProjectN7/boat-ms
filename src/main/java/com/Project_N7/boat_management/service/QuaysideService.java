@@ -37,7 +37,7 @@ public class QuaysideService {
     public Long quaysideSave(QuaysideTO quaysideTO) {
         Quayside quaysideToSave = new Quayside();
         quaysideToSave.setName(quaysideTO.getName());
-        quaysideToSave.setActive(quaysideTO.setActive(true));//Da controllare
+        quaysideToSave.setActive(quaysideTO.isActive());//Da controllare
 
         return quaysideRepository.save(quaysideToSave).getIdQuayside();
     }

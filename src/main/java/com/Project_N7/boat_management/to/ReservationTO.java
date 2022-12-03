@@ -18,14 +18,11 @@ public class ReservationTO {
     @Pattern(regexp = "^[a-z A-Z]$", message = "La banchina non può contenere caratteri speciali o numeri")
     private String quayside;
 
-    @NotBlank(message = "La data di inizio prenotazione non può essere nulla o vuota")
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", message = "La data di inizio prenotazione non può contenere lettere o caratteri speciali e deve seguire la forma" +
-            "yyyy/mm/gg")
+
+
     private java.sql.Date dateTimeFrom;
 
-    @NotBlank(message = "La data di fine prenotazione non può essere nulla o vuota")
-    @Pattern(regexp = "^[0-9]{4}-[0-9]{2}-[0-9]{2}$", message = "La data di fine prenotazione non può contenere lettere o caratteri speciali e deve seguire la forma" +
-            "yyyy/mm/gg")
+   
     private java.sql.Date dateTimeTo;
 
     private boolean isActive;

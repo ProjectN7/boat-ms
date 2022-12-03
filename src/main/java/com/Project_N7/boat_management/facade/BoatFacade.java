@@ -4,7 +4,7 @@ import com.Project_N7.boat_management.exception.LicencePlateException;
 import com.Project_N7.boat_management.rto.BoatCompletaRTO;
 import com.Project_N7.boat_management.rto.BoatRTO;
 import com.Project_N7.boat_management.service.BoatService;
-
+import com.Project_N7.boat_management.service.PierService;
 import com.Project_N7.boat_management.to.BoatTO;
 import com.Project_N7.boat_management.to.BoatToModifyTo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +41,7 @@ public class BoatFacade {
     }
 
     public List<String> getAllBoat() throws LicencePlateException { return boatService.getAllBoat(); }
+
 
 
 

@@ -7,8 +7,7 @@ public class PierTO {
     @Pattern(regexp = "^[a-z A-Z]+$", message = "Il nome non può contenere numeri o caratteri speciali")
     private String name;
 
-    @NotBlank(message = "La capacità non può essere nulla o vuota")
-    @Pattern(regexp = "^[0-9]{2}", message = "la capacità può contenere solo 2 numeri ")
+    
     private int capacity;
 
     public PierTO() { super(); }

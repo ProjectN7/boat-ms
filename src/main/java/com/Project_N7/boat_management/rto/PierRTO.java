@@ -2,23 +2,23 @@ package com.Project_N7.boat_management.rto;
 
 public class PierRTO {
 
-    private Long idPier;
+    private Integer idPier;
     private String name;
     private int capacity;
 
     public PierRTO() { super(); }
 
-    public PierRTO(Long idPier, String name, int capacity) {
+    public PierRTO(Integer idPier, String name, int capacity) {
         this.idPier = idPier;
         this.name = name;
         this.capacity = capacity;
     }
 
-    public Long getIdPier() {
+    public Integer getIdPier() {
         return idPier;
     }
 
-    public void setIdPier(Long idPier) {
+    public void setIdPier(Integer idPier) {
         this.idPier = idPier;
     }
 

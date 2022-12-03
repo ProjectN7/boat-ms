@@ -25,7 +25,7 @@ public class QuaysideTO {
         return isActive;
     }
 
-    public boolean setActive(boolean active) {
-        return isActive = active;
+    public void setActive(boolean active) {
+         isActive = active;
     } //Da controllare
 }

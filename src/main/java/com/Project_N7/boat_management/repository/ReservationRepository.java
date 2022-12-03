@@ -14,10 +14,10 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Reservation getReservationByIds(Long ids);
 
     //Da vedere
-    @Query("SELECT r " + "FROM Reservation r" + "WHERE r.licencePlate = ?1")
+    @Query(value = "SELECT r " + " FROM Reservation r" + " INNER JOIN r.boat b" + " WHERE b.licencePlate = ?1")
     List<Reservation> getReservationByLicencePlate(String licencePlate);
 
     //Da vedere
-    @Query("SELECT r" + "FROM Reservation r" + "WHERE r.isActive == TRUE")
+    @Query("SELECT r" + " FROM Reservation r" + " WHERE r.isActive = TRUE")
     List<Reservation> getAllReservationActive();
 }

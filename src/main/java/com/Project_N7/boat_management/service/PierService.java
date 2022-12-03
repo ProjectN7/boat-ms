@@ -20,7 +20,8 @@ public class PierService {
     @Autowired
     private PierRepository pierRepository;
 
-    public PierRTO getPierById(Long idPier) {
+    
+    public PierRTO getPierById(Integer idPier) {
 
         // Chiamo il metodo trasferisciDaPersonaAPersonaRto per popolarla con i dati che
         // mi servono
@@ -37,9 +38,10 @@ public class PierService {
         return pierRTOtemp;
     }
 
-    public boolean idPierExist(Long idPier) { return (pierRepository.getPierById(idPier)!= null); }
+    public boolean idPierExist(Integer idPier) { return (pierRepository.getPierById(idPier)!= null); }
 
-    public Long pierSave(PierTO pierTO) {
+
+    public Integer pierSave(PierTO pierTO) {
         Pier pierToSave = new Pier();
         pierToSave.setName(pierTO.getName());
         pierToSave.setCapacity(pierTO.getCapacity());
@@ -64,6 +66,6 @@ public class PierService {
         return pierRTOList;
     }
 
-    public List<Long> getAllPier() { return pierRepository.getAllPier(); }
+    public List<String> getAllPier() { return pierRepository.getAllPier(); }
 
 }
