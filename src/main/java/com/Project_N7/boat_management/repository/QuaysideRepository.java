@@ -14,8 +14,8 @@ public interface QuaysideRepository extends JpaRepository<Quayside, Long> {
     @Query("SELECT q.idQuayside FROM Quayside q")
     List<Long> getAllQuayside();
 
-    @Query("SELECT q " + "FROM Quayside q WHERE q.idQuayside IN ?1")
-    Quayside getQuaysideById(Long idQuayside);
+    @Query("SELECT q.name FROM Quayside q WHERE q.isActive = 0 AND q.pier = ?1")
+    List<String> getQuaysideById(Long pier);
 
 
     @Query("select q.name from Quayside q where IS_ACTIVE = 0 AND ID_PIER = :idPier")

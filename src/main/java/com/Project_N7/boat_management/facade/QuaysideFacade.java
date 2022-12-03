@@ -26,13 +26,13 @@ public class QuaysideFacade {
     @Autowired
     QuaysideService quaysideService;
 
-    public QuaysideRTO getQuaysideById(Long idQuayside) throws IdException {
-        if (!quaysideService.idQuaysideExist(idQuayside)) { // Prima chiamata al server per vedere se il
+    public List<String> getQuaysideById(Long pier) throws IdException {
+        if (!quaysideService.idQuaysideExist(pier)) { // Prima chiamata al server per vedere se il
             // l'id esiste
             throw new IdException("Id non presente"); // Altrimenti lancio l'eccezione
         }
         // Se il numero è presente vado a cercarmi i moli che lo posseggono
-        return quaysideService.getQuaysideById(idQuayside);
+        return quaysideService.getAllQuaysideByIdPier(pier);
     }
 
     public Object quaysideSave(QuaysideTO quaysideTO) {

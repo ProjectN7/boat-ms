@@ -21,7 +21,7 @@ public class Pier {
 
     public Integer getIdPier() { return idPier; }
 
-    public void setIdPier(Integer idPier) { idPier = idPier; }
+    public void setIdPier(Integer idPier) { this.idPier = idPier; }
 
     public String getName() { return name; }
 

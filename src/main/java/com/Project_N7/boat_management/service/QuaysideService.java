@@ -16,12 +16,6 @@ public class QuaysideService {
     @Autowired
     private QuaysideRepository quaysideRepository;
 
-    public QuaysideRTO getQuaysideById(Long idQuayside) {
-
-        // Chiamo il metodo trasferisciDaPersonaAPersonaRto per popolarla con i dati che
-        // mi servono
-        return populateQuaysideRTO(quaysideRepository.getQuaysideById(idQuayside));
-    }
 
     private QuaysideRTO populateQuaysideRTO(Quayside quayside) {
         QuaysideRTO quaysideRTOtemp = new QuaysideRTO();
@@ -32,7 +26,9 @@ public class QuaysideService {
         return quaysideRTOtemp;
     }
 
-    public boolean idQuaysideExist(Long idQuayside) { return (quaysideRepository.getQuaysideById(idQuayside)!= null); }
+
+
+    public boolean idQuaysideExist(Long pier) { return (quaysideRepository.getQuaysideById(pier)!= null); }
 
     public Long quaysideSave(QuaysideTO quaysideTO) {
         Quayside quaysideToSave = new Quayside();
@@ -60,4 +56,6 @@ public class QuaysideService {
     }
 
     public List<Long> getAllQuayside() { return quaysideRepository.getAllQuayside(); }
+
+    public List<String> getAllQuaysideByIdPier(Long pier) { return quaysideRepository.getQuaysideById(pier); }
 }

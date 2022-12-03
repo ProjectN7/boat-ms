@@ -8,12 +8,11 @@ public class Quayside {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "IDQuayside")
+    @Column(name = "Id_Quayside")
     private Long idQuayside;
 
-    @ManyToOne
-    @JoinColumn(name = "Id_Pier", nullable = false)
-    private Pier pier;
+    @Column(name = "ID_PIER")
+    private Long pier;
 
     @Column(name = "name")
     private String name;
@@ -33,11 +32,11 @@ public class Quayside {
         this.idQuayside = idQuayside;
     }
 
-    public Pier getPier() {
+    public Long getPier() {
         return pier;
     }
 
-    public void setPier(Pier pier) {
+    public void setPier(Long pier) {
         this.pier = pier;
     }
 

@@ -6,11 +6,13 @@ import com.Project_N7.boat_management.rto.ErrorRTO;
 import com.Project_N7.boat_management.service.QuaysideService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class CheckErrorsQuayside {
 
     @Autowired
