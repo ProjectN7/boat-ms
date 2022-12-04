@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.scheduling.annotation.EnableScheduling;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.spi.DocumentationType;
@@ -33,6 +34,7 @@ public class BoatManagementApplication {
 	 * @return the docket
 	 */
 	@Configuration
+	@EnableScheduling
 	public class SpringFoxConfig {
 		@Bean
 		public Docket api() {

@@ -1,7 +1,6 @@
 package com.Project_N7.boat_management.to;
 
 import com.Project_N7.boat_management.entity.Boat;
-import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

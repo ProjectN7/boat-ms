@@ -2,10 +2,12 @@ package com.Project_N7.boat_management.repository;
 
 import com.Project_N7.boat_management.entity.Reservation;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Repository
@@ -26,4 +28,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     @Query("DELETE FROM Reservation WHERE licencePlate = ?1")
     String deleteReservationByLicencePlate(String licencePlate);
+
+    @Transactional
+    @Modifying(clearAutomatically = true,flushAutomatically = true)
+    @Query(value = "UPDATE reservation SET is_Active = 0 WHERE dateTime_To <= :nowDateTime ", nativeQuery = true)
+    void updateReservation(@Param("nowDateTime") String nowDateTime);
 }

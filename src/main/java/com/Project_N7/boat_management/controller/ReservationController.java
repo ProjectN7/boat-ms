@@ -1,16 +1,24 @@
 package com.Project_N7.boat_management.controller;
 
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsReservation;
 import com.Project_N7.boat_management.exception.IdException;
 import com.Project_N7.boat_management.exception.LicencePlateException;
 import com.Project_N7.boat_management.facade.ReservationFacade;
+import com.Project_N7.boat_management.repository.ReservationRepository;
 import com.Project_N7.boat_management.rto.ReservationRTO;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,6 +32,9 @@ public class ReservationController {
 
     @Autowired
     private CheckErrorsReservation errors;
+
+    @Autowired
+    private ReservationRepository reservationRepository;
 
     @CrossOrigin
     @GetMapping(value = "/reservation/reservationListId")
@@ -82,4 +93,22 @@ public class ReservationController {
     }
 
 
+    @Scheduled(cron = "0 0 0 * * *")
+    public void scheduler() {
+        java.util.Date nowDateTime = new java.util.Date();
+        String ldt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        reservationRepository.updateReservation(ldt);
+    }
+
+    /*
+    @GetMapping(value = "/boat/getDate")
+    public ResponseEntity<Object> getDate() throws Exception{
+        String ldt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+        reservationRepository.updateReservation(ldt);
+            return new ResponseEntity<>("Update Fatto!", HttpStatus.OK);
+        }
+     */
+
 }
+
+
