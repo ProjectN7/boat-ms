@@ -11,11 +11,11 @@ public class ReservationTO {
     private String licencePlate;
 
     @NotBlank(message = "Il molo non può essere nullo o vuoto")
-    @Pattern(regexp = "^[a-z A-Z]$", message = "Il molo non può contenere caratteri speciali o numeri")
+    @Pattern(regexp = "^[a-z A-Z]+$", message = "Il molo non può contenere caratteri speciali o numeri")
     private String pier;
 
     @NotBlank(message = "La banchina non può essere nulla o vuota")
-    @Pattern(regexp = "^[a-z A-Z]$", message = "La banchina non può contenere caratteri speciali o numeri")
+    @Pattern(regexp = "^[a-z A-Z]+$", message = "La banchina non può contenere caratteri speciali o numeri")
     private String quayside;
 
 

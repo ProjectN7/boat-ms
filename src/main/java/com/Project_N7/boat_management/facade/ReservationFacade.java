@@ -1,21 +1,29 @@
 package com.Project_N7.boat_management.facade;
 
+import com.Project_N7.boat_management.entity.Boat;
+import com.Project_N7.boat_management.entity.Reservation;
 import com.Project_N7.boat_management.entity.Risposta;
 import com.Project_N7.boat_management.exception.IdException;
+import com.Project_N7.boat_management.exception.LicencePlateException;
 import com.Project_N7.boat_management.rto.ReservationRTO;
 
+import com.Project_N7.boat_management.service.QuaysideService;
 import com.Project_N7.boat_management.service.ReservationService;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ReservationFacade {
 
     @Autowired
     ReservationService reservationService;
+
+    @Autowired
+    QuaysideService quaysideService;
 
     public ReservationRTO getReservationById(Long idReservation) throws IdException {
         if (!reservationService.idReservationExist(idReservation)) { // Prima chiamata al server per vedere se il
@@ -24,6 +32,13 @@ public class ReservationFacade {
         }
         // Se il numero è presente vado a cercarmi le prenotazioni che lo posseggono
         return reservationService.getReservationById(idReservation);
+    }
+
+    public ReservationRTO getReservationByLicencePlate(String licencePlate) throws LicencePlateException{
+        if(!reservationService.reservationByLicencePlateExist(licencePlate)){
+            throw new LicencePlateException("Targa non presente");
+        }
+        return reservationService.getReservationByLicencePlate(licencePlate);
     }
 
     public Object reservationSave(ReservationTO reservationTO) {
@@ -39,5 +54,8 @@ public class ReservationFacade {
 
     public List<Long> getAllReservation() throws IdException { return reservationService.getAllReservation(); }
 
-    //Vedi come aggiungere l'eliminazione!!!
+    public String deleteReservationByLicencePlate(String licencePlate) {
+        reservationService.deleteReservationByLicencePlate(licencePlate);
+        return "è stata cancellata la prenotazione associata associata alla targa: " +licencePlate;
+    }
 }

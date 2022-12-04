@@ -7,7 +7,7 @@ import java.sql.Date;
 public class ReservationRTO {
 
     private Long IdReservation;
-    private Boat boat;
+    private String licencePlate;
     private String pier;
     private String quayside;
     private java.sql.Date dateTimeFrom;
@@ -16,9 +16,9 @@ public class ReservationRTO {
 
     public ReservationRTO() { super(); }
 
-    public ReservationRTO(Long idReservation, Boat boat, String pier, String quayside, Date dateTimeFrom, Date dateTimeTo, boolean isActive) {
+    public ReservationRTO(Long idReservation, String licencePlate, String pier, String quayside, Date dateTimeFrom, Date dateTimeTo, boolean isActive) {
         IdReservation = idReservation;
-        this.boat = boat;
+        this.licencePlate = licencePlate;
         this.pier = pier;
         this.quayside = quayside;
         this.dateTimeFrom = dateTimeFrom;
@@ -34,12 +34,12 @@ public class ReservationRTO {
         IdReservation = idReservation;
     }
 
-    public Boat getBoat() {
-        return boat;
+    public String getLicencePlate() {
+        return licencePlate;
     }
 
-    public void setBoat(Boat boat) {
-        this.boat = boat;
+    public void setLicencePlate(String licencePlate) {
+        this.licencePlate = licencePlate;
     }
 
     public String getPier() {
@@ -83,7 +83,7 @@ public class ReservationRTO {
     }
 
     public String toString() {
-        return " \"Plate\": \"" + boat.getLicencePlate() + "\",\n \"Id Prenotazione\": \"" + IdReservation + "\",\n \"Molo\": \"" + pier
+        return " \"Plate\": \"" + licencePlate + "\",\n \"Id Prenotazione\": \"" + IdReservation + "\",\n \"Molo\": \"" + pier
                 + ",\"\n \"Banchina\": \"" + quayside + "\",\n \"Data partenza prenotazione\": \"" + dateTimeFrom
                 + "\", \n \"Data fine prenotazione\": \"" + dateTimeTo + "\", \n \"è attiva?\": \"" + isActive
                 + "\",";

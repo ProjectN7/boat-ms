@@ -1,5 +1,6 @@
 package com.Project_N7.boat_management.service;
 
+import com.Project_N7.boat_management.entity.Boat;
 import com.Project_N7.boat_management.entity.Reservation;
 import com.Project_N7.boat_management.repository.ReservationRepository;
 import com.Project_N7.boat_management.rto.ReservationRTO;
@@ -28,7 +29,7 @@ public class ReservationService {
 
         // Popolamento tramite setter e getter
         reservationRTOtemp.setIdReservation(reservation.getIdReservation());
-        reservationRTOtemp.setBoat(reservation.getBoat());
+        reservationRTOtemp.setLicencePlate(reservation.getLicencePlate());
         reservationRTOtemp.setPier(reservation.getPier());
         reservationRTOtemp.setQuayside(reservation.getQuayside());
         reservationRTOtemp.setDateTimeFrom(reservation.getDateTimeFrom());
@@ -39,16 +40,16 @@ public class ReservationService {
     public boolean idReservationExist(Long idReservation) { return (reservationRepository.getReservationByIds(idReservation)!= null); }
 
     //Da vedere
-    public boolean ReservationExistByLicencePlate(Reservation reservation) { return (reservationRepository.getReservationByLicencePlate(reservation.getBoat().getLicencePlate())!=null);}
+    public boolean ReservationExistByLicencePlate(Reservation reservation) { return (reservationRepository.getReservationByLicencePlate(reservation.getLicencePlate())!=null);}
 
     public Long reservationSave(ReservationTO reservationTO) {
         Reservation reservationToSave = new Reservation();
+        reservationToSave.setLicencePlate(reservationTO.getLicencePlate());
         reservationToSave.setPier(reservationTO.getPier());
         reservationToSave.setQuayside(reservationTO.getQuayside());
         reservationToSave.setDateTimeFrom(reservationTO.getDateTimeFrom());
         reservationToSave.setDateTimeTo(reservationTO.getDateTimeTo());
         reservationToSave.setActive(reservationTO.setActive(true));//Da controllare
-        reservationToSave.setBoat(reservationTO.getBoat()); //Da controllare/capire
         return reservationRepository.save(reservationToSave).getIdReservation();
     }
 
@@ -75,4 +76,9 @@ public class ReservationService {
         reservationRepository.deleteById(idReservation);
     }
 
+    public ReservationRTO getReservationByLicencePlate(String licencePlate) { return populateReservationRTO(reservationRepository.getReservationByLicencePlate(licencePlate)); }
+
+    public void deleteReservationByLicencePlate(String licencePlate) { reservationRepository.deleteReservationByLicencePlate(licencePlate); }
+
+    public boolean reservationByLicencePlateExist(String licencePlate) { return (reservationRepository.getReservationByLicencePlate(licencePlate) !=null); }
 }

@@ -12,9 +12,9 @@ public class Reservation {
     @Column(name = "IdReservation")
     private Long idReservation;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "licence_plate", referencedColumnName = "licence_plate")
-    private Boat boat;
+
+    @Column(name = "licencePlate")
+    private String licencePlate;
 
     @Column(name = "pier")
     private String pier;
@@ -38,15 +38,15 @@ public class Reservation {
     }
 
     public void setIdReservation(Long idReservation) {
-        idReservation = idReservation;
+        this.idReservation = idReservation;
     }
 
-    public Boat getBoat() {
-        return boat;
+    public String getLicencePlate() {
+        return licencePlate;
     }
 
-    public void setBoat(Boat boat) {
-        this.boat = boat;
+    public void setLicencePlate(String licencePlate) {
+        this.licencePlate = licencePlate;
     }
 
     public String getPier() {
