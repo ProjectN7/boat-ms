@@ -1,8 +1,10 @@
 package com.Project_N7.boat_management.to;
 
 import com.Project_N7.boat_management.entity.Boat;
+import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 public class ReservationTO {
@@ -10,9 +12,8 @@ public class ReservationTO {
     @Pattern(regexp = "^[A-Z]{2}-[0-9]{5}$", message = "La targa non può contenere caratteri speciali o non seguire la forma XX00000")
     private String licencePlate;
 
-    @NotBlank(message = "Il molo non può essere nullo o vuoto")
-    @Pattern(regexp = "^[a-z A-Z]+$", message = "Il molo non può contenere caratteri speciali o numeri")
-    private String pier;
+    @NotNull
+    private Integer pier;
 
     @NotBlank(message = "La banchina non può essere nulla o vuota")
     @Pattern(regexp = "^[a-z A-Z]+$", message = "La banchina non può contenere caratteri speciali o numeri")
@@ -22,7 +23,7 @@ public class ReservationTO {
 
     private java.sql.Date dateTimeFrom;
 
-   
+
     private java.sql.Date dateTimeTo;
 
     private boolean isActive;
@@ -31,7 +32,7 @@ public class ReservationTO {
 
     public ReservationTO() { super(); }
 
-    public ReservationTO(String licencePlate, String pier, String quayside, java.sql.Date dateTimeFrom, java.sql.Date dateTimeTo, boolean isActive, Boat boat) {
+    public ReservationTO(String licencePlate, Integer pier, String quayside, java.sql.Date dateTimeFrom, java.sql.Date dateTimeTo, boolean isActive, Boat boat) {
         this.licencePlate = licencePlate;
         this.pier = pier;
         this.quayside = quayside;
@@ -49,11 +50,11 @@ public class ReservationTO {
         this.licencePlate = licencePlate;
     }
 
-    public String getPier() {
+    public Integer getPier() {
         return pier;
     }
 
-    public void setPier(String pier) {
+    public void setPier(Integer pier) {
         this.pier = pier;
     }
 

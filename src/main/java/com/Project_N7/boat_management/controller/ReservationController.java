@@ -2,17 +2,11 @@ package com.Project_N7.boat_management.controller;
 
 import java.util.List;
 
-import com.Project_N7.boat_management.checkerrors.CheckErrorsBoat;
 import com.Project_N7.boat_management.checkerrors.CheckErrorsReservation;
-import com.Project_N7.boat_management.entity.Boat;
 import com.Project_N7.boat_management.exception.IdException;
 import com.Project_N7.boat_management.exception.LicencePlateException;
-import com.Project_N7.boat_management.facade.BoatFacade;
 import com.Project_N7.boat_management.facade.ReservationFacade;
-import com.Project_N7.boat_management.rto.BoatRTO;
 import com.Project_N7.boat_management.rto.ReservationRTO;
-import com.Project_N7.boat_management.to.BoatTO;
-import com.Project_N7.boat_management.to.BoatToModifyTo;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

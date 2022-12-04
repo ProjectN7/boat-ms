@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
-@Table(name="Reservation")
+@Table(name="reservation")
 public class Reservation {
 
     @Id
@@ -17,7 +17,7 @@ public class Reservation {
     private String licencePlate;
 
     @Column(name = "pier")
-    private String pier;
+    private Integer pier;
 
     @Column(name = "quayside")
     private String quayside;
@@ -49,11 +49,11 @@ public class Reservation {
         this.licencePlate = licencePlate;
     }
 
-    public String getPier() {
+    public Integer getPier() {
         return pier;
     }
 
-    public void setPier(String pier) {
+    public void setPier(Integer pier) {
         this.pier = pier;
     }
 
