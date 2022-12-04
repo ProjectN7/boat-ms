@@ -17,8 +17,6 @@ public class Quayside {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "is_active")
-    private boolean isActive;
 
     public Quayside() {
         super();
@@ -46,14 +44,6 @@ public class Quayside {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 
 }

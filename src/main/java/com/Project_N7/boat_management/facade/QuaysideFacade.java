@@ -2,18 +2,8 @@ package com.Project_N7.boat_management.facade;
 
 import com.Project_N7.boat_management.entity.Risposta;
 import com.Project_N7.boat_management.exception.IdException;
-import com.Project_N7.boat_management.exception.LicencePlateException;
-import com.Project_N7.boat_management.rto.BoatCompletaRTO;
-import com.Project_N7.boat_management.rto.BoatRTO;
-import com.Project_N7.boat_management.rto.PierRTO;
-import com.Project_N7.boat_management.rto.QuaysideRTO;
-import com.Project_N7.boat_management.service.BoatService;
 
-import com.Project_N7.boat_management.service.PierService;
 import com.Project_N7.boat_management.service.QuaysideService;
-import com.Project_N7.boat_management.to.BoatTO;
-import com.Project_N7.boat_management.to.BoatToModifyTo;
-import com.Project_N7.boat_management.to.PierTO;
 import com.Project_N7.boat_management.to.QuaysideTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -6,15 +6,13 @@ public class QuaysideRTO {
     private Long idQuayside;
     private Pier pier;
     private String name;
-    private boolean isActive;
 
     public QuaysideRTO() { super(); }
 
-    public QuaysideRTO(Long idQuayside, Pier pier, String name, boolean isActive) {
+    public QuaysideRTO(Long idQuayside, Pier pier, String name) {
         this.idQuayside = idQuayside;
         this.pier = pier;
         this.name = name;
-        this.isActive = isActive;
     }
 
     public Long getIdQuayside() {
@@ -39,14 +37,6 @@ public class QuaysideRTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isActive() {
-        return isActive;
-    }
-
-    public void setActive(boolean active) {
-        isActive = active;
     }
 
     public String toString() {
