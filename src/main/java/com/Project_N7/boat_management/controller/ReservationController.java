@@ -92,6 +92,17 @@ public class ReservationController {
 
     }
 
+    @DeleteMapping(path = "/deleteReservation/{licencePlate}")
+    public ResponseEntity<Object> deleteReservation(@PathVariable String licencePlate){
+        try {
+            errors.checkExistLicencePlate(licencePlate);
+        } catch (LicencePlateException e) {
+            return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
+        }
+
+        return new ResponseEntity<>(reservationFacade.deleteReservationByLicencePlate(licencePlate), HttpStatus.OK);
+    }
+
 
     @Scheduled(cron = "0 0 0 * * *")
     public void scheduler() {
