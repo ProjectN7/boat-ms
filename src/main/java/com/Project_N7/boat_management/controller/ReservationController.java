@@ -59,7 +59,6 @@ public class ReservationController {
         } catch (LicencePlateException e){
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-
         return new ResponseEntity<>(reservationRTOs, HttpStatus.OK);
     }
 
@@ -92,14 +91,13 @@ public class ReservationController {
 
     }
 
-    @DeleteMapping(path = "/deleteReservation/{licencePlate}")
-    public ResponseEntity<Object> deleteReservation(@PathVariable String licencePlate){
+    @DeleteMapping(value = "/reservation/reservationDelete")
+    public ResponseEntity<Object> deleteReservation(@RequestParam String licencePlate){
         try {
             errors.checkExistLicencePlate(licencePlate);
         } catch (LicencePlateException e) {
             return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
         }
-
         return new ResponseEntity<>(reservationFacade.deleteReservationByLicencePlate(licencePlate), HttpStatus.OK);
     }
 

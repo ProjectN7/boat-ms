@@ -30,10 +30,10 @@ public class BoatFacade {
         String licencePlate = boatService.boatSave(boatTO);
         Risposta risp = new Risposta();
         if (licencePlate != null) {
-            risp.setResponse("La barca con la targa: " + licencePlate + " è stata aggiunta");
+            risp.setResponse("Registrazione effettuata con Successo");
             return risp;
         }
-        risp.setResponse("La barca non è stata inserita");
+        risp.setResponse(licencePlate);
         return risp;
     }
     public BoatCompletaRTO modificaBoat(String licencePlate, BoatToModifyTo boatToModifyTO) {

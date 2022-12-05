@@ -19,13 +19,15 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Reservation getReservationByIds(Long ids);
 
     //Da vedere
-    @Query("SELECT r " + " FROM Reservation r" + " WHERE r.licencePlate = :licencePlate")
+    @Query("SELECT r FROM Reservation r WHERE r.licencePlate = ?1")
     Reservation getReservationByLicencePlate(@Param("licencePlate") String licencePlate);
 
     //Da vedere
     @Query("SELECT r.idReservation" + " FROM Reservation r" + " WHERE r.isActive = TRUE")
     List<Reservation> getAllReservationActive();
 
+    @Transactional
+    @Modifying(clearAutomatically = true,flushAutomatically = true)
     @Query("DELETE FROM Reservation WHERE licencePlate = ?1")
     String deleteReservationByLicencePlate(String licencePlate);
 

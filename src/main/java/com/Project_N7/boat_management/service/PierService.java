@@ -66,6 +66,6 @@ public class PierService {
         return pierRTOList;
     }
 
-    public List<String> getAllPier() { return pierRepository.getAllPier(); }
+    public List<Long> getAllPier() { return pierRepository.getAllPier(); }
 
 }

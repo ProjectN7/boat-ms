@@ -25,7 +25,7 @@ public class PierController {
     @CrossOrigin
     @GetMapping(value = "/pier/pierAllList")
     public ResponseEntity<Object> getAllPier() {
-        List<String> pierRTOs;
+        List<Long> pierRTOs;
         try {
             pierRTOs = pierFacade.getAllPier();
         } catch (IdException e) {

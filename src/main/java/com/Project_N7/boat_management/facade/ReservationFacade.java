@@ -45,17 +45,23 @@ public class ReservationFacade {
         Long idReservation = reservationService.reservationSave(reservationTO);
         Risposta risp = new Risposta();
         if (idReservation != null) {
-            risp.setResponse("La prenotazione con l'id: " + idReservation + " è stata aggiunta");
-            return risp;
+            risp.setResponse("Prenotazione Effettuata con successo");
+        }else {
+            risp.setResponse("La prenotazione non è stata inserita");
         }
-        risp.setResponse("La prenotazione non è stata inserita");
         return risp;
     }
 
     public List<Long> getAllReservation() throws IdException { return reservationService.getAllReservation(); }
 
-    public String deleteReservationByLicencePlate(String licencePlate) {
-        reservationService.deleteReservationByLicencePlate(licencePlate);
-        return "è stata cancellata la prenotazione associata associata alla targa: " +licencePlate;
+    public Object deleteReservationByLicencePlate(String licencePlate) {
+        Risposta risp = new Risposta();
+        if (licencePlate != null) {
+            reservationService.deleteReservationByLicencePlate(licencePlate);
+            risp.setResponse("Prenotazione cancellata con successo");
+            return risp;
+        }
+        return "";
+
     }
 }

@@ -3,6 +3,7 @@ package com.Project_N7.boat_management.controller;
 import java.util.List;
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsBoat;
+import com.Project_N7.boat_management.entity.Risposta;
 import com.Project_N7.boat_management.exception.LicencePlateException;
 import com.Project_N7.boat_management.facade.BoatFacade;
 import com.Project_N7.boat_management.rto.BoatRTO;
@@ -32,7 +33,6 @@ public class BoatController {
         try {
             boatRTOs = boatFacade.getBoatByLicencePlate(licencePlate);
         } catch (LicencePlateException e) {
-
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
 
@@ -41,6 +41,7 @@ public class BoatController {
     @CrossOrigin
     @PostMapping(value = "/boat/boatSave")
     public ResponseEntity<Object> boatSave(@Valid @RequestBody BoatTO boatTO){
+        Risposta risp = new Risposta();
         try {
             errors.checkExistLicencePlate(boatTO.getLicencePlate());
         } catch (LicencePlateException e) {

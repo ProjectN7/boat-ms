@@ -38,6 +38,6 @@ public class PierFacade {
         return risp;
     }
 
-    public List<String> getAllPier() throws IdException { return pierService.getAllPier(); }
+    public List<Long> getAllPier() throws IdException { return pierService.getAllPier(); }
 
 }

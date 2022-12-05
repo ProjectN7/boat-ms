@@ -15,7 +15,7 @@ public class ReservationTO {
     private Integer pier;
 
     @NotBlank(message = "La banchina non può essere nulla o vuota")
-    @Pattern(regexp = "^[a-z A-Z]+$", message = "La banchina non può contenere caratteri speciali o numeri")
+    @Pattern(regexp = "^[a-z A-Z]+[0-9]+$", message = "La banchina non può contenere caratteri speciali o numeri")
     private String quayside;
 
 
