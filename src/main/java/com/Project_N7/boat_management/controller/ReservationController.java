@@ -91,8 +91,8 @@ public class ReservationController {
 
     }
 
-    @DeleteMapping(value = "/reservation/reservationDelete")
-    public ResponseEntity<Object> deleteReservation(@RequestParam String licencePlate){
+    @DeleteMapping(path = "/reservation/reservationDelete/{licencePlate}")
+    public ResponseEntity<Object> deleteReservation(@PathVariable String licencePlate){
         try {
             errors.checkExistLicencePlate(licencePlate);
         } catch (LicencePlateException e) {
@@ -108,6 +108,7 @@ public class ReservationController {
         String ldt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         reservationRepository.updateReservation(ldt);
     }
+
 
     /*
     @GetMapping(value = "/boat/getDate")

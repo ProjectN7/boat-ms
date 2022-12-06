@@ -29,7 +29,7 @@ public class Reservation {
     private java.sql.Date dateTimeTo;
 
     @Column(name = "is_active")
-    private boolean isActive;
+    private int isActive;
 
     public Reservation() { super(); }
 
@@ -81,11 +81,11 @@ public class Reservation {
         this.dateTimeTo = dateTimeTo;
     }
 
-    public boolean isActive() {
+    public int  isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         isActive = active;
     }
 

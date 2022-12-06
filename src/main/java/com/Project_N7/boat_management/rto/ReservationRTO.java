@@ -12,11 +12,11 @@ public class ReservationRTO {
     private String quayside;
     private java.sql.Date dateTimeFrom;
     private java.sql.Date dateTimeTo;
-    private boolean isActive;
+    private int isActive;
 
     public ReservationRTO() { super(); }
 
-    public ReservationRTO(Long idReservation, String licencePlate, Integer pier, String quayside, Date dateTimeFrom, Date dateTimeTo, boolean isActive) {
+    public ReservationRTO(Long idReservation, String licencePlate, Integer pier, String quayside, Date dateTimeFrom, Date dateTimeTo, int isActive) {
         IdReservation = idReservation;
         this.licencePlate = licencePlate;
         this.pier = pier;
@@ -74,11 +74,11 @@ public class ReservationRTO {
         this.dateTimeTo = dateTimeTo;
     }
 
-    public boolean isActive() {
+    public int isActive() {
         return isActive;
     }
 
-    public void setActive(boolean active) {
+    public void setActive(int active) {
         isActive = active;
     }
 

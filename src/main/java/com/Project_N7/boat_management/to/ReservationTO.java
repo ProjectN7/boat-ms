@@ -25,13 +25,13 @@ public class ReservationTO {
 
     private java.sql.Date dateTimeTo;
 
-    private boolean isActive;
+    private int isActive;
 
     private Boat boat;
 
     public ReservationTO() { super(); }
 
-    public ReservationTO(String licencePlate, Integer pier, String quayside, java.sql.Date dateTimeFrom, java.sql.Date dateTimeTo, boolean isActive, Boat boat) {
+    public ReservationTO(String licencePlate, Integer pier, String quayside, java.sql.Date dateTimeFrom, java.sql.Date dateTimeTo, Byte isActive, Boat boat) {
         this.licencePlate = licencePlate;
         this.pier = pier;
         this.quayside = quayside;
@@ -81,9 +81,9 @@ public class ReservationTO {
         this.dateTimeTo = dateTimeTo;
     }
 
-    public boolean isActive() { return isActive; }
+    public int  isActive() { return isActive; }
 
-    public boolean setActive(boolean active) { return isActive = active; } //Da controllare
+    public void setActive(int active) { isActive = active; } //Da controllare
 
     public Boat getBoat() { return boat; }
 

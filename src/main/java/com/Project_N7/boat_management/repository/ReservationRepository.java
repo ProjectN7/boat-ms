@@ -20,19 +20,21 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
 
     //Da vedere
     @Query("SELECT r FROM Reservation r WHERE r.licencePlate = ?1")
-    Reservation getReservationByLicencePlate(@Param("licencePlate") String licencePlate);
+    Reservation getReservationByLicencePlate(String licencePlate);
 
     //Da vedere
-    @Query("SELECT r.idReservation" + " FROM Reservation r" + " WHERE r.isActive = TRUE")
+    @Query("SELECT r.idReservation" + " FROM Reservation r" + " WHERE r.isActive = 1")
     List<Reservation> getAllReservationActive();
 
     @Transactional
     @Modifying(clearAutomatically = true,flushAutomatically = true)
     @Query("DELETE FROM Reservation WHERE licencePlate = ?1")
-    String deleteReservationByLicencePlate(String licencePlate);
+    void deleteReservationByLicencePlate(String licencePlate);
+
 
     @Transactional
     @Modifying(clearAutomatically = true,flushAutomatically = true)
     @Query(value = "UPDATE reservation SET is_Active = 0 WHERE dateTime_To <= :nowDateTime ", nativeQuery = true)
     void updateReservation(@Param("nowDateTime") String nowDateTime);
+
 }

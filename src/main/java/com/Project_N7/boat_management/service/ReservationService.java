@@ -34,6 +34,7 @@ public class ReservationService {
         reservationRTOtemp.setQuayside(reservation.getQuayside());
         reservationRTOtemp.setDateTimeFrom(reservation.getDateTimeFrom());
         reservationRTOtemp.setDateTimeTo(reservation.getDateTimeTo());
+        reservationRTOtemp.setActive(reservationRTOtemp.isActive());
         return reservationRTOtemp;
     }
 
@@ -49,7 +50,7 @@ public class ReservationService {
         reservationToSave.setQuayside(reservationTO.getQuayside());
         reservationToSave.setDateTimeFrom(reservationTO.getDateTimeFrom());
         reservationToSave.setDateTimeTo(reservationTO.getDateTimeTo());
-        reservationToSave.setActive(reservationTO.setActive(true));
+        reservationToSave.setActive(1);
         return reservationRepository.save(reservationToSave).getIdReservation();
     }
 
@@ -78,7 +79,7 @@ public class ReservationService {
 
     public ReservationRTO getReservationByLicencePlate(String licencePlate) { return populateReservationRTO(reservationRepository.getReservationByLicencePlate(licencePlate)); }
 
-    public String deleteReservationByLicencePlate(String licencePlate) { return reservationRepository.deleteReservationByLicencePlate(licencePlate); }
+    public void deleteReservationByLicencePlate(String licencePlate) { reservationRepository.deleteReservationByLicencePlate(licencePlate); }
 
     public boolean reservationByLicencePlateExist(String licencePlate) { return (reservationRepository.getReservationByLicencePlate(licencePlate) !=null); }
 }
