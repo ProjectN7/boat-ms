@@ -17,6 +17,8 @@ public class BoatFacade {
     @Autowired
     BoatService boatService;
 
+    Risposta risp = new Risposta();
+
     public BoatRTO getBoatByLicencePlate(String licencePlate) throws LicencePlateException {
         if (!boatService.licencePlateExist(licencePlate)) { // Prima chiamata al server per vedere se il
             // la targa esiste
@@ -28,16 +30,16 @@ public class BoatFacade {
 
     public Object boatSave(BoatTO boatTO) {
         String licencePlate = boatService.boatSave(boatTO);
-        Risposta risp = new Risposta();
         if (licencePlate != null) {
             risp.setResponse("Registrazione effettuata con Successo");
             return risp;
         }
-        risp.setResponse(licencePlate);
-        return risp;
+        return "";
     }
-    public BoatCompletaRTO modificaBoat(String licencePlate, BoatToModifyTo boatToModifyTO) {
-        return boatService.modificaBoat(licencePlate, boatToModifyTO);
+    public Object modificaBoat(String licencePlate, BoatToModifyTo boatToModifyTO) {
+        boatService.modificaBoat(licencePlate, boatToModifyTO);
+        risp.setResponse("Modifica effettuata con successo");
+        return risp;
     }
 
     public List<String> getAllBoat() throws LicencePlateException { return boatService.getAllBoat(); }
