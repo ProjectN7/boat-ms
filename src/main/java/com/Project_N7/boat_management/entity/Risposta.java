@@ -5,6 +5,15 @@ public class Risposta {
     private String code;
     private String titolo;
 
+
+    public Risposta() { super(); }
+
+    public Risposta(String response, String code, String titolo) {
+        this.response = response;
+        this.code = code;
+        this.titolo = titolo;
+    }
+
     public String getResponse() {
         return response;
     }
@@ -13,5 +22,19 @@ public class Risposta {
         this.response = response;
     }
 
+    public String getCode() {
+        return code;
+    }
 
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public String getTitolo() {
+        return titolo;
+    }
+
+    public void setTitolo(String titolo) {
+        this.titolo = titolo;
+    }
 }

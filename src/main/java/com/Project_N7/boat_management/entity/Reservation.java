@@ -12,7 +12,6 @@ public class Reservation {
     @Column(name = "IdReservation")
     private Long idReservation;
 
-
     @Column(name = "licencePlate")
     private String licencePlate;
 
