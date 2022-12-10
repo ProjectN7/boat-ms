@@ -3,16 +3,16 @@ package com.Project_N7.boat_management.entity;
 import javax.persistence.*;
 import java.sql.Date;
 @Entity
-@Table(name="typeTicket")
+@Table(name="typeticket")
 public class TypeTicket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idTypeTicket")
+    @Column(name = "ID_TYPETICKET")
     private Integer idTypeTicket;
 
 
-    @Column(name = "description")
+    @Column(name = "DESCRIPTION")
     private String description;
 
     public TypeTicket() { super();

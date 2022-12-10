@@ -52,6 +52,6 @@ public class TypeTicketService {
         return typeTicketRTOList;
     }
 
-    public List<Integer> getAllTypeTicket() { return typeTicketRepository.getAllTypeTicket(); }
+    public List<TypeTicket> getAllTypeTicket() { return typeTicketRepository.getAllTypeTicket(); }
 
 }

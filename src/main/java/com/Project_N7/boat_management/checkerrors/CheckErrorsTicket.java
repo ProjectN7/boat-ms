@@ -19,9 +19,6 @@ public class CheckErrorsTicket {
     @Autowired
     private TicketService ticketService;
 
-    @Autowired
-    private Risposta risposta;
-
     public void checkIdList(List<Long> ids) throws IdException {
 
         List<ErrorRTO> errorRTO_list = new ArrayList<>();

@@ -3,9 +3,11 @@ package com.Project_N7.boat_management.controller;
 import java.util.List;
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsTypeTicket;
+import com.Project_N7.boat_management.entity.TypeTicket;
 import com.Project_N7.boat_management.exception.IdException;
 import com.Project_N7.boat_management.facade.TypeTicketFacade;
 import com.Project_N7.boat_management.repository.TypeTicketRepository;
+import com.Project_N7.boat_management.rto.TypeTicketRTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,19 +30,19 @@ public class TypeTicketController {
     private TypeTicketRepository typeTicketRepository;
 
     @CrossOrigin
-    @GetMapping(value = "/boat/typeTicketAllList")
+    @GetMapping(value = "/ticket/getAllTypeTicket")
     public ResponseEntity<Object> getAllTypeTicket() {
-        List<Integer> typeTicketRTOs;
+        List<TypeTicket> typeTickets;
         try {
-            typeTicketRTOs = typeTicketFacade.getAllTypeTicket();
+            typeTickets = typeTicketFacade.getAllTypeTicket();
         } catch (IdException e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
-        if (typeTicketRTOs.isEmpty()) {
+        if (typeTickets == null) {
             return new ResponseEntity<>("Nessuna tipologia di ticket è presente nel database", HttpStatus.NOT_FOUND);
         } else {
 
-            return new ResponseEntity<>(typeTicketRTOs,HttpStatus.OK);
+            return new ResponseEntity<>(typeTickets,HttpStatus.OK);
         }
 
     }

@@ -17,7 +17,6 @@ public class TicketFacade {
     @Autowired
     TicketService ticketService;
 
-    @Autowired
     Risposta risp = new Risposta();
 
     public TicketRTO getTicketById(Long idTicket) throws IdException {

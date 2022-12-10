@@ -1,6 +1,7 @@
 package com.Project_N7.boat_management.facade;
 
 import com.Project_N7.boat_management.entity.Risposta;
+import com.Project_N7.boat_management.entity.TypeTicket;
 import com.Project_N7.boat_management.exception.IdException;
 import com.Project_N7.boat_management.exception.TypeTicketException;
 import com.Project_N7.boat_management.rto.TypeTicketRTO;
@@ -36,7 +37,7 @@ public class TypeTicketFacade {
         return risp;
     }
 
-    public List<Integer> getAllTypeTicket() throws IdException { return typeTicketService.getAllTypeTicket(); }
+    public List<TypeTicket> getAllTypeTicket() throws IdException { return typeTicketService.getAllTypeTicket(); }
 
 
 }
