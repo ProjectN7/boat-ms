@@ -4,6 +4,7 @@ package com.Project_N7.boat_management.controller;
 import com.Project_N7.boat_management.checkerrors.CheckErrorsTicket;
 import com.Project_N7.boat_management.exception.IdException;
 import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.TypeTicketException;
 import com.Project_N7.boat_management.facade.TicketFacade;
 import com.Project_N7.boat_management.repository.TicketRepository;
 import com.Project_N7.boat_management.rto.ReservationRTO;
@@ -54,21 +55,17 @@ public class TicketController {
         return new ResponseEntity<>(ticketRTOs, HttpStatus.OK);
     }
 
-/*
     //Il try catch su due ticket dello stesso tipo
     @CrossOrigin
     @PostMapping(value = "/ticket/reservationTicket")
     public ResponseEntity<Object> reservationSave(@Valid @RequestBody TicketTO ticketTO){
         try {
-            errors.checkExistLicencePlate(ticketTO.getLicencePlate());
-        } catch (LicencePlateException e) {
+            errors.checkExistLicencePlate(ticketTO.getLicencePlate(), ticketTO.getIdTypeTicket());
+        } catch (TypeTicketException e) {
             return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
         }
         return new ResponseEntity<>(ticketFacade.ticketSave(ticketTO), HttpStatus.OK);
     }
 
- */
-
-    //Da aggiungere il "Delete"
 
 }

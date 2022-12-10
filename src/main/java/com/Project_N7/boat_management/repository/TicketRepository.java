@@ -34,4 +34,8 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Modifying(clearAutomatically = true,flushAutomatically = true)
     @Query(value = "UPDATE ticket SET is_Active = 0 WHERE  t.idTicket = ?1", nativeQuery = true)
     void updateTicket(@Param("idTicket") Long idTicket);
+
+    @Query(value = "SELECT idTicket FROM Ticket WHERE licencePlate = ?1 AND idTypeTicket = ?2")
+    List<Integer> getIdTicketSameIdTypeTicket(String licencePlate, Integer idTypeTicket);
+
 }

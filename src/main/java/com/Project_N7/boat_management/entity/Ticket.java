@@ -8,8 +8,8 @@ import java.sql.Date;
 public class Ticket {
 
     @Id
-    @Column(name = "iDTicket")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID_TICKET")
     private Long idTicket;
 
     @Column(name = "licencePlate")
@@ -18,17 +18,21 @@ public class Ticket {
     @Column(name = "date")
     private java.sql.Date date;
 
-    @Column(name = "idTypeTicket")
+    @Column(name = "ID_TYPETICKET")
     private Integer idTypeTicket;
 
-    @Column (name = "Description")
+    @Column (name = "Descrizione")
     private String description;
 
+    /*
     @Column (name = "isActive")
     private Integer isActive;
 
+     */
+
     public Ticket() { super(); }
 
+    /*
     public Integer getIsActive() {
         return isActive;
     }
@@ -37,6 +41,7 @@ public class Ticket {
         this.isActive = isActive;
     }
 
+     */
     public Long getIdTicket() {
         return idTicket;
     }

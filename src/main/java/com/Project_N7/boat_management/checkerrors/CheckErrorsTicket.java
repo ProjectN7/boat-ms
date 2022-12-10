@@ -3,6 +3,7 @@ package com.Project_N7.boat_management.checkerrors;
 import com.Project_N7.boat_management.entity.Risposta;
 import com.Project_N7.boat_management.exception.IdException;
 import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.TypeTicketException;
 import com.Project_N7.boat_management.rto.ErrorRTO;
 import com.Project_N7.boat_management.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,14 +51,14 @@ public class CheckErrorsTicket {
 
 
     //Modificalo con il TypeTicket
-    public void checkExistLicencePlate(String licencePlate) throws LicencePlateException {
+    public void checkExistLicencePlate(String licencePlate, Integer idTypeTicket) throws TypeTicketException {
         List<ErrorRTO> errorRTO_list = new ArrayList<>();
-        if (ticketService.ticketByLicencePlateExist(licencePlate)) {
+        if (!ticketService.getIdTicketSameIdTypeTicket(licencePlate, idTypeTicket).isEmpty()) {
             errorRTO_list.add(new ErrorRTO(
-                    "Esiste già un con questa targa"));
+                    "Esiste già un ticket di questa tipologia per questa barca"));
         }
         if (!errorRTO_list.isEmpty()) {
-            throw new LicencePlateException(errorRTO_list, HttpStatus.CONFLICT);
+            throw new TypeTicketException(errorRTO_list, HttpStatus.CONFLICT);
         }
     }
 

@@ -65,4 +65,6 @@ public class TicketService {
     public void deleteTicketByLicencePlate(String licencePlate) { ticketRepository.deleteTicketByLicencePlate(licencePlate); }
 
     public boolean ticketByLicencePlateExist(String licencePlate) { return (ticketRepository.getTicketByLicencePlate(licencePlate)!= null); }
+
+    public List<Integer> getIdTicketSameIdTypeTicket(String licencePlate, Integer idTypeTicket) { return  (ticketRepository.getIdTicketSameIdTypeTicket(licencePlate, idTypeTicket)); }
 }
