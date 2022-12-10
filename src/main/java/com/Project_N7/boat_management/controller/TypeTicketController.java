@@ -37,7 +37,7 @@ public class TypeTicketController {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
         }
         if (typeTicketRTOs.isEmpty()) {
-            return new ResponseEntity<>("Nessuna barca presente nel database", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Nessuna tipologia di ticket è presente nel database", HttpStatus.NOT_FOUND);
         } else {
 
             return new ResponseEntity<>(typeTicketRTOs,HttpStatus.OK);

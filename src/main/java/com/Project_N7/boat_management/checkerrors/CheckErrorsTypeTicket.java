@@ -40,7 +40,6 @@ public class CheckErrorsTypeTicket {
         }
     }
 
-
     public ErrorRTO checkIfNull(Long id) {
         if (id == null) {
             return new ErrorRTO("null inserito nella lista");
@@ -48,5 +47,4 @@ public class CheckErrorsTypeTicket {
         return null;
     }
 
-    
 }

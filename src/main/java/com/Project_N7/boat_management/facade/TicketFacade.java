@@ -17,6 +17,9 @@ public class TicketFacade {
     @Autowired
     TicketService ticketService;
 
+    @Autowired
+    Risposta risp = new Risposta();
+
     public TicketRTO getTicketById(Long idTicket) throws IdException {
         if (!ticketService.idTicketExist(idTicket)) {
             throw new IdException("Id non presente");
@@ -34,7 +37,6 @@ public class TicketFacade {
 
     public Object ticketSave(TicketTO ticketTO) {
         Long idTicket = ticketService.ticketSave(ticketTO);
-        Risposta risp = new Risposta();
         if (idTicket != null) {
             risp.setResponse("Ticket creato con successo");
         } else {
