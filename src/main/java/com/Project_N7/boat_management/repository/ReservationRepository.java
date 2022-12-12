@@ -26,11 +26,9 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     @Query("SELECT r.idReservation" + " FROM Reservation r" + " WHERE r.isActive = 1")
     List<Reservation> getAllReservationActive();
 
-    @Transactional
     @Modifying(clearAutomatically = true,flushAutomatically = true)
-    @Query("DELETE FROM Reservation WHERE licencePlate = ?1")
-    void deleteReservationByLicencePlate(String licencePlate);
-
+    @Query("UPDATE Reservation SET isActive = 0 WHERE idReservation = ?1")
+    void deleteReservationById(Long idReservation);
 
     @Transactional
     @Modifying(clearAutomatically = true,flushAutomatically = true)

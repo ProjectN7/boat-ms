@@ -16,7 +16,7 @@ public class Reservation {
     private String licencePlate;
 
     @Column(name = "pier")
-    private Integer pier;
+    private String pier;
 
     @Column(name = "quayside")
     private String quayside;
@@ -48,11 +48,11 @@ public class Reservation {
         this.licencePlate = licencePlate;
     }
 
-    public Integer getPier() {
+    public String getPier() {
         return pier;
     }
 
-    public void setPier(Integer pier) {
+    public void setPier(String pier) {
         this.pier = pier;
     }
 

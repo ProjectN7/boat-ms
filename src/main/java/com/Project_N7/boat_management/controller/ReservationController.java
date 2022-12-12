@@ -15,12 +15,14 @@ import com.Project_N7.boat_management.rto.ReservationRTO;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 @RestController
@@ -91,14 +93,16 @@ public class ReservationController {
 
     }
 
-    @DeleteMapping(path = "/reservation/reservationDelete/{licencePlate}")
-    public ResponseEntity<Object> deleteReservation(@PathVariable String licencePlate){
+
+    @CrossOrigin
+    @GetMapping(path = "/reservation/reservationDelete")
+    public ResponseEntity<Object> deleteReservation(@RequestParam Long idReservation){
         try {
-            errors.checkExistLicencePlate(licencePlate);
-        } catch (LicencePlateException e) {
+            errors.checkExistId(idReservation);
+        } catch (IdException e) {
             return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
         }
-        return new ResponseEntity<>(reservationFacade.deleteReservationByLicencePlate(licencePlate), HttpStatus.OK);
+        return new ResponseEntity<>(reservationFacade.deleteReservationById(idReservation), HttpStatus.OK);
     }
 
 

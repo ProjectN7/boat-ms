@@ -11,8 +11,10 @@ import com.Project_N7.boat_management.service.QuaysideService;
 import com.Project_N7.boat_management.service.ReservationService;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Set;
 
@@ -54,14 +56,14 @@ public class ReservationFacade {
 
     public List<Long> getAllReservation() throws IdException { return reservationService.getAllReservation(); }
 
-    public Object deleteReservationByLicencePlate(String licencePlate) {
+    @Transactional
+    public Object deleteReservationById (Long idReservation) {
         Risposta risp = new Risposta();
-        if (licencePlate != null) {
-            reservationService.deleteReservationByLicencePlate(licencePlate);
+        if (idReservation != null) {
+            reservationService.deleteReservationById(idReservation);
             risp.setResponse("Prenotazione cancellata con successo");
             return risp;
         }
         return "";
-
     }
 }

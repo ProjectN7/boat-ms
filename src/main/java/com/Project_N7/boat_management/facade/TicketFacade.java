@@ -9,6 +9,7 @@ import com.Project_N7.boat_management.to.TicketTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @Service
@@ -46,16 +47,7 @@ public class TicketFacade {
 
     public List<Long> getAllTicket() throws IdException { return ticketService.getAllTicket(); }
 
-    public Object deleteTicketByLicencePlate (String licencePlate) {
-        Risposta risp = new Risposta();
-        if(licencePlate != null) {
-            ticketService.deleteTicketByLicencePlate(licencePlate);
-            risp.setResponse("Ticket cancellato con successo");
-            return risp;
-        }
-        return "";
-    }
-
+    @Transactional
     public Object deleteTicketById (Long idTicket) {
         Risposta risp = new Risposta();
         if (idTicket != null) {

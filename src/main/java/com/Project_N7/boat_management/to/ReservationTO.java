@@ -12,7 +12,7 @@ public class ReservationTO {
     private String licencePlate;
 
     @NotNull
-    private Integer pier;
+    private String pier;
 
     @NotBlank(message = "La banchina non può essere nulla o vuota")
     @Pattern(regexp = "^[a-z A-Z]+[0-9]+$", message = "La banchina non può contenere caratteri speciali o numeri")
@@ -31,7 +31,7 @@ public class ReservationTO {
 
     public ReservationTO() { super(); }
 
-    public ReservationTO(String licencePlate, Integer pier, String quayside, java.sql.Date dateTimeFrom, java.sql.Date dateTimeTo, Byte isActive, Boat boat) {
+    public ReservationTO(String licencePlate, String pier, String quayside, java.sql.Date dateTimeFrom, java.sql.Date dateTimeTo, Byte isActive, Boat boat) {
         this.licencePlate = licencePlate;
         this.pier = pier;
         this.quayside = quayside;
@@ -49,11 +49,11 @@ public class ReservationTO {
         this.licencePlate = licencePlate;
     }
 
-    public Integer getPier() {
+    public String getPier() {
         return pier;
     }
 
-    public void setPier(Integer pier) {
+    public void setPier(String pier) {
         this.pier = pier;
     }
 

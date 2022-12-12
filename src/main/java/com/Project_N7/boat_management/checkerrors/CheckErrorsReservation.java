@@ -64,4 +64,10 @@ public class CheckErrorsReservation {
             throw new LicencePlateException("La Prenotazione della prenotazione con la targa: " + licencePlate + " non è presente", HttpStatus.NOT_FOUND);
         }
     }
+
+    public void checkExistId(Long idReservation) throws IdException {
+        if (!reservationService.idReservationExist(idReservation)) {
+            throw new IdException("Il ticket con l'id: " + idReservation + "non è presente", HttpStatus.NOT_FOUND);
+        }
+    }
 }

@@ -77,6 +77,5 @@ public class TicketController {
         return new ResponseEntity<>(ticketFacade.deleteTicketById(idTicket), HttpStatus.OK);
     }
 
-    
 
 }

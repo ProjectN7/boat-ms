@@ -74,12 +74,11 @@ public class ReservationService {
     public List<Long> getAllReservation() { return reservationRepository.getAllReservation(); }
 
     public void deleteReservationById(Long idReservation) {
-        reservationRepository.deleteById(idReservation);
+        reservationRepository.deleteReservationById(idReservation);
     }
 
     public ReservationRTO getReservationByLicencePlate(String licencePlate) { return populateReservationRTO(reservationRepository.getReservationByLicencePlate(licencePlate)); }
 
-    public void deleteReservationByLicencePlate(String licencePlate) { reservationRepository.deleteReservationByLicencePlate(licencePlate); }
 
     public boolean reservationByLicencePlateExist(String licencePlate) { return (reservationRepository.getReservationByLicencePlate(licencePlate) !=null); }
 }

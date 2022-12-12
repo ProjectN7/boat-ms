@@ -8,7 +8,7 @@ public class ReservationRTO {
 
     private Long IdReservation;
     private String licencePlate;
-    private Integer pier;
+    private String pier;
     private String quayside;
     private java.sql.Date dateTimeFrom;
     private java.sql.Date dateTimeTo;
@@ -16,7 +16,7 @@ public class ReservationRTO {
 
     public ReservationRTO() { super(); }
 
-    public ReservationRTO(Long idReservation, String licencePlate, Integer pier, String quayside, Date dateTimeFrom, Date dateTimeTo, int isActive) {
+    public ReservationRTO(Long idReservation, String licencePlate, String pier, String quayside, Date dateTimeFrom, Date dateTimeTo, int isActive) {
         IdReservation = idReservation;
         this.licencePlate = licencePlate;
         this.pier = pier;
@@ -42,11 +42,11 @@ public class ReservationRTO {
         this.licencePlate = licencePlate;
     }
 
-    public Integer getPier() {
+    public String getPier() {
         return pier;
     }
 
-    public void setPier(Integer pier) {
+    public void setPier(String pier) {
         this.pier = pier;
     }
 
