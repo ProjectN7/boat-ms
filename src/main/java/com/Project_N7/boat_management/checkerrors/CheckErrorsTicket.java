@@ -62,6 +62,13 @@ public class CheckErrorsTicket {
         }
     }
 
+    public void checkExistId(Long idTicket) throws IdException {
+        if (!ticketService.idTicketExist(idTicket)) {
+            throw new IdException("Il ticket con l'id: " + idTicket + "non è presente", HttpStatus.NOT_FOUND);
+        }
+    }
+
+
     public void checkTicketByLicencePlateExist(String licencePlate) throws LicencePlateException {
         if (!ticketService.ticketByLicencePlateExist(licencePlate)) {
             throw new LicencePlateException("Il ticket con la targa: " + licencePlate + " non è presente", HttpStatus.NOT_FOUND);

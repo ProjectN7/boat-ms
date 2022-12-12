@@ -31,6 +31,7 @@ public class TicketService {
         ticketRTOtemp.setIdTypeTicket(ticket.getIdTypeTicket());
         ticketRTOtemp.setDate(ticket.getDate());
         ticketRTOtemp.setDescription(ticket.getDescription());
+        ticketRTOtemp.setIsActive(ticket.getIsActive());
         return ticketRTOtemp;
     }
 
@@ -42,6 +43,7 @@ public class TicketService {
         ticketToSave.setDate(ticketTO.getDate());
         ticketToSave.setIdTypeTicket(ticketTO.getIdTypeTicket());
         ticketToSave.setDescription(ticketTO.getDescription());
+        ticketToSave.setIsActive(1);
         return ticketRepository.save(ticketToSave).getIdTicket();
     }
 
@@ -50,7 +52,6 @@ public class TicketService {
 
         for (Ticket ticket : ticketList) {
             TicketRTO ticketRTOtemp = populateTicketRTO(ticket);
-
             ticketRTOList.add(ticketRTOtemp);
         }
         return ticketRTOList;

@@ -19,8 +19,7 @@ public class TicketRTO {
 
     public TicketRTO() { super(); }
 
-    public TicketRTO(Long idTicket, String licencePlate, Date date,
-                     Integer idTypeTicket, String description) {
+    public TicketRTO(Long idTicket, String licencePlate, Date date, Integer idTypeTicket, String description) {
         this.idTicket = idTicket;
         this.licencePlate = licencePlate;
         this.date = date;

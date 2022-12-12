@@ -24,15 +24,12 @@ public class Ticket {
     @Column (name = "Descrizione")
     private String description;
 
-    /*
     @Column (name = "isActive")
     private Integer isActive;
 
-     */
-
     public Ticket() { super(); }
 
-    /*
+
     public Integer getIsActive() {
         return isActive;
     }
@@ -41,7 +38,6 @@ public class Ticket {
         this.isActive = isActive;
     }
 
-     */
     public Long getIdTicket() {
         return idTicket;
     }

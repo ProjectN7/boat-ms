@@ -55,7 +55,6 @@ public class TicketController {
         return new ResponseEntity<>(ticketRTOs, HttpStatus.OK);
     }
 
-    //Il try catch su due ticket dello stesso tipo
     @CrossOrigin
     @PostMapping(value = "/ticket/reservationTicket")
     public ResponseEntity<Object> reservationSave(@Valid @RequestBody TicketTO ticketTO){
@@ -67,5 +66,17 @@ public class TicketController {
         return new ResponseEntity<>(ticketFacade.ticketSave(ticketTO), HttpStatus.OK);
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/ticket/deleteTicketById")
+    public ResponseEntity<Object> deleteTicketById(@RequestParam Long idTicket){
+        try {
+            errors.checkExistId(idTicket);
+        } catch (IdException e) {
+            return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
+        }
+        return new ResponseEntity<>(ticketFacade.deleteTicketById(idTicket), HttpStatus.OK);
+    }
+
+    
 
 }

@@ -16,10 +16,16 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("SELECT t FROM Ticket t WHERE t.idTicket IN ?1")
     Ticket getTicketById(Long id);
 
-    @Query("DELETE FROM Ticket WHERE idTicket = ?1")
+    //Appena modificata, la quesry è stata testata su DB e funziona
+    @Transactional
+    @Modifying(clearAutomatically = true,flushAutomatically = true)
+    @Query("UPDATE Ticket SET isActive = 0 WHERE idTicket = ?1")
     void deleteTicketById(Long id);
 
-    @Query("DELETE FROM Ticket t WHERE t.licencePlate = ?1")
+    //Appena modificato, la query è stata testata su DB e funziona
+    @Transactional
+    @Modifying(clearAutomatically = true,flushAutomatically = true)
+    @Query("UPDATE Ticket SET isActive = 0 WHERE licencePlate = ?1")
     void deleteTicketByLicencePlate(String licencePlate);
 
     @Query("SELECT t FROM Ticket t WHERE t.licencePlate = ?1")

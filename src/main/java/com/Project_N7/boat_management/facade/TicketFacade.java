@@ -46,10 +46,20 @@ public class TicketFacade {
 
     public List<Long> getAllTicket() throws IdException { return ticketService.getAllTicket(); }
 
-    public Object deleteReservationByLicencePlate (String licencePlate) {
+    public Object deleteTicketByLicencePlate (String licencePlate) {
         Risposta risp = new Risposta();
         if(licencePlate != null) {
             ticketService.deleteTicketByLicencePlate(licencePlate);
+            risp.setResponse("Ticket cancellato con successo");
+            return risp;
+        }
+        return "";
+    }
+
+    public Object deleteTicketById (Long idTicket) {
+        Risposta risp = new Risposta();
+        if (idTicket != null) {
+            ticketService.deleteTicketById(idTicket);
             risp.setResponse("Ticket cancellato con successo");
             return risp;
         }
