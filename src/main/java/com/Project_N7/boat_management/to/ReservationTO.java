@@ -6,16 +6,18 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
+import static com.Project_N7.boat_management.constants.Constants.*;
+
 public class ReservationTO {
-    @NotBlank(message = "La targa non può essere nulla o vuota")
-    @Pattern(regexp = "^[A-Z]{2}-[0-9]{5}$", message = "La targa non può contenere caratteri speciali o non seguire la forma XX00000")
+    @NotBlank(message = LICENCE_PLATE_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[A-Z]{2}-[0-9]{5}$", message = LICENCE_PLATE_INFO)
     private String licencePlate;
 
     @NotNull
     private String pier;
 
-    @NotBlank(message = "La banchina non può essere nulla o vuota")
-    @Pattern(regexp = "^[a-z A-Z]+[0-9]+$", message = "La banchina non può contenere caratteri speciali o numeri")
+    @NotBlank(message = QUAYSIDE_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[a-z A-Z]+[0-9]+$", message = QUAYSIDE_INFO)
     private String quayside;
 
 

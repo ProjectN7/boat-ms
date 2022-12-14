@@ -1,7 +1,5 @@
 package com.Project_N7.boat_management.rto;
 
-import com.Project_N7.boat_management.entity.Boat;
-
 import java.sql.Date;
 
 public class ReservationRTO {

@@ -1,16 +1,18 @@
 package com.Project_N7.boat_management.checkerrors;
-import java.util.ArrayList;
-import java.util.List;
 
-
-import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.ErrorRTO;
 import com.Project_N7.boat_management.service.BoatService;
 import com.Project_N7.boat_management.to.BoatToModifyTo;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.Project_N7.boat_management.constants.Constants.*;
 
 //@Component
 @Service
@@ -19,48 +21,17 @@ public class CheckErrorsBoat {
     @Autowired
     private BoatService boatService;
 
-    public void checkIdList(List<Long> ids) throws LicencePlateException {
-
-        List<ErrorRTO> errorRTO_list = new ArrayList<>();
-        if (CollectionUtils.isEmpty(ids)) {
-            errorRTO_list.add(new ErrorRTO("Non è stato inserito nessun id per la ricerca!"));
-            throw new LicencePlateException(errorRTO_list, HttpStatus.NOT_FOUND); // Lancio subito poichè voglio che un
-            // differente HttpStatus
-        }
-
-        List<ErrorRTO> errorRtoListClear = new ArrayList<>();
-        for (ErrorRTO errorRtoTemp : errorRTO_list) {
-            if (errorRtoTemp != null) {
-                errorRtoListClear.add(errorRtoTemp);
-            }
-        }
-
-        // Lancio dell'eccezione
-        if (!errorRtoListClear.isEmpty()) {
-            throw new LicencePlateException(errorRTO_list, HttpStatus.BAD_REQUEST);
-        }
-    }
-
-
-    public ErrorRTO checkIfNull(Long id) {
-        if (id == null) {
-            return new ErrorRTO("null inserito nella lista");
-        }
-        return null;
-    }
-
-    public void checkExistLicencePlate(String licence_plate) throws LicencePlateException {
-        List<ErrorRTO> errorRTO_list = new ArrayList<>();
+    public void checkExistLicencePlate(String licence_plate) throws ErrorException {
+        ErrorRTO error = new ErrorRTO();
         if (boatService.licencePlateExist(licence_plate)) {
-            errorRTO_list.add(new ErrorRTO(
-                    "Esiste già una barca con questa targa"));
+            error.setMessage(LICENCE_PLATE_ALREADY_PRESENT);
         }
-        if (!errorRTO_list.isEmpty()) {
-            throw new LicencePlateException(errorRTO_list, HttpStatus.CONFLICT);
+        if (StringUtils.isNotBlank(error.getMessage())) {
+            throw new ErrorException(error.getMessage());
         }
     }
     public void checkInformations(String licence_plate, BoatToModifyTo boatToModifyTO)
-            throws LicencePlateException, IllegalArgumentException, IllegalAccessException {
+            throws ErrorException, IllegalArgumentException, IllegalAccessException {
 
         checkLicencePlateExist(licence_plate);
         List<ErrorRTO> errorRtoList = new ArrayList<>();
@@ -92,14 +63,14 @@ public class CheckErrorsBoat {
         }
 
         if (!CollectionUtils.isEmpty(errorRtoList)) {
-            throw new LicencePlateException(errorRtoList, HttpStatus.BAD_REQUEST);
+            throw new ErrorException(errorRtoList);
 
         }
     }
 
-    public void checkLicencePlateExist(String licence_plate) throws LicencePlateException {
+    public void checkLicencePlateExist(String licence_plate) throws ErrorException {
         if (!boatService.licencePlateExist(licence_plate)) {
-            throw new LicencePlateException("La targa: " + licence_plate + " non è presente", HttpStatus.NOT_FOUND);
+            throw new ErrorException(LICENCE_PLATE + licence_plate + NOT_PRESENT);
         }
     }
 }

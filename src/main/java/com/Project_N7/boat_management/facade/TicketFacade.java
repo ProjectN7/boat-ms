@@ -1,8 +1,6 @@
 package com.Project_N7.boat_management.facade;
 
-import com.Project_N7.boat_management.entity.Risposta;
-import com.Project_N7.boat_management.exception.IdException;
-import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.TicketRTO;
 import com.Project_N7.boat_management.service.TicketService;
 import com.Project_N7.boat_management.to.TicketTO;
@@ -12,50 +10,49 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.util.List;
 
+import static com.Project_N7.boat_management.constants.Constants.*;
+
 @Service
 public class TicketFacade {
 
     @Autowired
     TicketService ticketService;
 
-    Risposta risp = new Risposta();
-
-    public TicketRTO getTicketById(Long idTicket) throws IdException {
+    public TicketRTO getTicketById(Long idTicket) throws ErrorException {
         if (!ticketService.idTicketExist(idTicket)) {
-            throw new IdException("Id non presente");
+            throw new ErrorException(TICKET_ID_NOT_FOUND);
         }
 
         return ticketService.getTicketById(idTicket);
     }
 
-    public TicketRTO getTicketByLicencePlate(String licencePlate) throws LicencePlateException{
+    public TicketRTO getTicketByLicencePlate(String licencePlate) throws ErrorException{
         if(!ticketService.ticketByLicencePlateExist(licencePlate)){
-            throw new LicencePlateException("Targa non presente");
+            throw new ErrorException(LICENCE_PLATE_NOT_PRESENT);
         }
         return  ticketService.getTicketByLicencePlate(licencePlate);
     }
 
     public Object ticketSave(TicketTO ticketTO) {
         Long idTicket = ticketService.ticketSave(ticketTO);
+        String resp = "";
         if (idTicket != null) {
-            risp.setResponse("Ticket creato con successo");
+            resp = TICKET_CREATED;
         } else {
-            risp.setResponse("Il ticket non è stato inserito");
+            resp = TICKET_NOT_CREATED;
         }
-        return risp;
+        return resp;
     }
 
-    public List<Long> getAllTicket() throws IdException { return ticketService.getAllTicket(); }
+    public List<Long> getAllTicket() throws ErrorException { return ticketService.getAllTicket(); }
 
     @Transactional
     public Object deleteTicketById (Long idTicket) {
-        Risposta risp = new Risposta();
         if (idTicket != null) {
             ticketService.deleteTicketById(idTicket);
-            risp.setResponse("Ticket cancellato con successo");
-            return risp;
+            return TICKET_CANCELLED;
         }
-        return "";
+        return TICKET_NOT_CANCELLED;
     }
 
 

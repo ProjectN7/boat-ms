@@ -1,7 +1,6 @@
 package com.Project_N7.boat_management.repository;
 
 import com.Project_N7.boat_management.entity.TypeTicket;
-import com.Project_N7.boat_management.rto.TypeTicketRTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

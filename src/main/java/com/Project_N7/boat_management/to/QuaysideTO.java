@@ -1,11 +1,12 @@
 package com.Project_N7.boat_management.to;
 
 
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import static com.Project_N7.boat_management.constants.Constants.NAME_INFO;
+
 public class QuaysideTO {
-    @Pattern(regexp = "^[a-z A-Z]+$", message = "Il nome non può contenere numeri o caratteri speciali")
+    @Pattern(regexp = "^[a-z A-Z]+$", message = NAME_INFO)
     private String name;
 
 

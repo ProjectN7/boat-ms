@@ -1,9 +1,7 @@
 package com.Project_N7.boat_management.facade;
 
-import com.Project_N7.boat_management.entity.Risposta;
 import com.Project_N7.boat_management.entity.TypeTicket;
-import com.Project_N7.boat_management.exception.IdException;
-import com.Project_N7.boat_management.exception.TypeTicketException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.TypeTicketRTO;
 import com.Project_N7.boat_management.service.TypeTicketService;
 import com.Project_N7.boat_management.to.TypeTicketTO;
@@ -12,15 +10,17 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.Project_N7.boat_management.constants.Constants.*;
+
 @Service
 public class TypeTicketFacade {
 
     @Autowired
     TypeTicketService typeTicketService;
 
-    public TypeTicketRTO getTypeTicketById(Integer idTypeTicket) throws TypeTicketException {
+    public TypeTicketRTO getTypeTicketById(Integer idTypeTicket) throws ErrorException {
         if (!typeTicketService.idTypeTicketExist(idTypeTicket)) {
-            throw new TypeTicketException("Id non presente");
+            throw new ErrorException(TYPE_TICKET_ID_NOT_FOUND);
         }
 
         return typeTicketService.getTypeTicketById(idTypeTicket);
@@ -28,16 +28,16 @@ public class TypeTicketFacade {
 
     public Object typeTicketSave(TypeTicketTO typeTicketTO) {
         Integer idTypeTicket = typeTicketService.typeTicketSave(typeTicketTO);
-        Risposta risp = new Risposta();
+        String resp = "";
         if (idTypeTicket != null){
-            risp.setResponse("TypeTicket Creato con successo");
+           resp = TYPE_TICKET_CREATED;
         } else {
-            risp.setResponse("La tipologia di ticket non è stata creata");
+            resp = TYPE_TICKET_NOT_CREATED;
         }
-        return risp;
+        return resp;
     }
 
-    public List<TypeTicket> getAllTypeTicket() throws IdException { return typeTicketService.getAllTypeTicket(); }
+    public List<TypeTicket> getAllTypeTicket() throws ErrorException { return typeTicketService.getAllTypeTicket(); }
 
 
 }

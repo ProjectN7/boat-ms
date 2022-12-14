@@ -2,14 +2,11 @@ package com.Project_N7.boat_management.controller;
 
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsTicket;
-import com.Project_N7.boat_management.exception.IdException;
-import com.Project_N7.boat_management.exception.LicencePlateException;
-import com.Project_N7.boat_management.exception.TypeTicketException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.TicketFacade;
+import com.Project_N7.boat_management.models.ServiceResponse;
 import com.Project_N7.boat_management.repository.TicketRepository;
-import com.Project_N7.boat_management.rto.ReservationRTO;
 import com.Project_N7.boat_management.rto.TicketRTO;
-import com.Project_N7.boat_management.to.ReservationTO;
 import com.Project_N7.boat_management.to.TicketTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+
+import static com.Project_N7.boat_management.constants.Constants.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -37,11 +36,10 @@ public class TicketController {
         TicketRTO ticketRTOs;
         try {
             ticketRTOs = ticketFacade.getTicketById(idTicket);
-        } catch (IdException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(ticketRTOs, HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketRTOs), HttpStatus.OK);
     }
     @CrossOrigin
     @GetMapping(value = "/ticket/reservationListLicencePlate")
@@ -49,21 +47,22 @@ public class TicketController {
         TicketRTO ticketRTOs;
         try {
             ticketRTOs = ticketFacade.getTicketByLicencePlate(licencePlate);
-        } catch (LicencePlateException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e){
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(ticketRTOs, HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketRTOs), HttpStatus.OK);
+
     }
 
     @CrossOrigin
     @PostMapping(value = "/ticket/reservationTicket")
-    public ResponseEntity<Object> reservationSave(@Valid @RequestBody TicketTO ticketTO){
+    public ResponseEntity<Object> ticketSave(@Valid @RequestBody TicketTO ticketTO){
         try {
             errors.checkExistLicencePlate(ticketTO.getLicencePlate(), ticketTO.getIdTypeTicket());
-        } catch (TypeTicketException e) {
-            return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
+        } catch (ErrorException e) {
+        return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.CONFLICT.name(), EXCEPTION, GENERIC_ERROR, e.getErrorRTO()), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(ticketFacade.ticketSave(ticketTO), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketFacade.ticketSave(ticketTO)), HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -71,10 +70,11 @@ public class TicketController {
     public ResponseEntity<Object> deleteTicketById(@RequestParam Long idTicket){
         try {
             errors.checkExistId(idTicket);
-        } catch (IdException e) {
-            return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(ticketFacade.deleteTicketById(idTicket), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_CANCELLED, TICKET_CANCELLED, ticketFacade.deleteTicketById(idTicket)), HttpStatus.OK);
+
     }
 
 

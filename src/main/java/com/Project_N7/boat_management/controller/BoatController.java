@@ -1,11 +1,9 @@
 package com.Project_N7.boat_management.controller;
 
-import java.util.List;
-
 import com.Project_N7.boat_management.checkerrors.CheckErrorsBoat;
-import com.Project_N7.boat_management.entity.Risposta;
-import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.BoatFacade;
+import com.Project_N7.boat_management.models.ServiceResponse;
 import com.Project_N7.boat_management.rto.BoatRTO;
 import com.Project_N7.boat_management.to.BoatTO;
 import com.Project_N7.boat_management.to.BoatToModifyTo;
@@ -15,6 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+
+import static com.Project_N7.boat_management.constants.Constants.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -32,39 +33,35 @@ public class BoatController {
         BoatRTO boatRTOs;
         try {
             boatRTOs = boatFacade.getBoatByLicencePlate(licencePlate);
-        } catch (LicencePlateException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
         }
-
-            return new ResponseEntity<>(boatRTOs,HttpStatus.OK);
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, boatRTOs), HttpStatus.OK);
         }
     @CrossOrigin
     @PostMapping(value = "/boat/boatSave")
     public ResponseEntity<Object> boatSave(@Valid @RequestBody BoatTO boatTO){
-        Risposta risp = new Risposta();
         try {
             errors.checkExistLicencePlate(boatTO.getLicencePlate());
-        } catch (LicencePlateException e) {
-            return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.CONFLICT.name(), EXCEPTION, e.getMessage()), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(boatFacade.boatSave(boatTO), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, boatFacade.boatSave(boatTO)), HttpStatus.OK);
     }
     @CrossOrigin
     @PostMapping(path = "/modificaBoat/{licencePlate}")
     public ResponseEntity<Object> modificaBoat(@Valid @PathVariable("licencePlate") String licencePlate,
                                                @Valid @RequestBody BoatToModifyTo boatToModifyTO) {
-
         try {
 
             errors.checkInformations(licencePlate, boatToModifyTO);
 
-        } catch (LicencePlateException e) {
-            return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
-
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), EXCEPTION, e.getMessage()), HttpStatus.BAD_REQUEST);
         } catch (IllegalArgumentException | IllegalAccessException e) {
-            e.printStackTrace();
+            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
-        return new ResponseEntity<>(boatFacade.modificaBoat(licencePlate, boatToModifyTO), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, boatFacade.modificaBoat(licencePlate, boatToModifyTO)), HttpStatus.OK);
     }
     @CrossOrigin
     @GetMapping(value = "/boat/boatAllList")
@@ -72,14 +69,13 @@ public class BoatController {
         List<String> boatRTOs;
         try {
             boatRTOs = boatFacade.getAllBoat();
-        } catch (LicencePlateException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (boatRTOs.isEmpty()) {
-            return new ResponseEntity<>("Nessuna barca presente nel database", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
         } else {
-
-            return new ResponseEntity<>(boatRTOs,HttpStatus.OK);
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, boatRTOs), HttpStatus.OK);
         }
 
     }

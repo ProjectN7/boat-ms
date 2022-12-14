@@ -1,7 +1,6 @@
 package com.Project_N7.boat_management.entity;
 
 import javax.persistence.*;
-import java.sql.Date;
 @Entity
 @Table(name="typeticket")
 public class TypeTicket {

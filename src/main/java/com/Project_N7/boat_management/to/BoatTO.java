@@ -3,34 +3,36 @@ package com.Project_N7.boat_management.to;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 
+import static com.Project_N7.boat_management.constants.Constants.*;
+
 public class BoatTO {
-    @NotBlank(message = "La targa non può essere nulla o vuota")
-    @Pattern(regexp = "^[A-Z]{2}-[0-9]{5}$", message = "La targa non può contenere caratteri speciali o non seguire la forma XX00000")
+    @NotBlank(message = LICENCE_PLATE_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[A-Z]{2}-[0-9]{5}$", message = LICENCE_PLATE_INFO)
     private String licencePlate;
 
-    @NotBlank(message = "Il codice fiscale non può essere nullo o vuoto")
-    @Pattern(regexp = "[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]", message = "Codice fiscale non valido")
+    @NotBlank(message = CF_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]", message = CF_INFO)
     private String cf;
-    @Pattern(regexp = "^[a-z A-Z]+$", message = "Il nome non può contenere numeri o caratteri speciali")
+    @Pattern(regexp = "^[a-z A-Z]+$", message = NAME_INFO)
     private String name;
 
-    @Pattern(regexp = "^[a-z A-Z]+$", message = "Il nome non può contenere numeri o caratteri speciali")
+    @Pattern(regexp = "^[a-z A-Z]+$", message = NAME_INFO)
     private String colour;
 
-    @NotBlank(message = "La licenza di navigazione non può essere nulla o vuota")
-    @Pattern(regexp = "^[A-Z]{2}-[0-9]{4}$", message = "La licenza di navigazione non può contenere caratteri speciali o non seguire la forma XX0000")
+    @NotBlank(message = NAVIGATION_LICENCE_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[A-Z]{2}-[0-9]{4}$", message =NAVIGATION_LICENCE_INFO)
     private String navigationLicence;
 
-    @NotBlank(message = "La potenza non può essere nulla o vuota")
-    @Pattern(regexp = "^[0-9]{3}$", message = "La potenza non può contenere caratteri speciali o lettere")
+    @NotBlank(message = POWER_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[0-9]{3}$", message = POWER_INFO)
     private String power;
 
-    @NotBlank(message = "La dichiarazione di conformità non può essere nulla o vuota")
-    @Pattern(regexp = "^[A-Z]{6}-[0-9]{3}$", message = "La dichiarazione di conformità non può contenere caratteri speciali o non seguire la forma XXXXXX000")
+    @NotBlank(message = DECLARATION_OF_CONFORMITY_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[A-Z]{6}-[0-9]{3}$", message = DECLARATION_OF_CONFORMITY_INFO)
     private String declarationOfConformity;
 
-    @NotBlank(message = "L 'RCA non può essere nulla o vuota")
-    @Pattern(regexp = "^[A-Z]{2}-[0-9]{3}$", message = "LL 'RCA non può contenere caratteri speciali o non seguire la forma XX000")
+    @NotBlank(message = RCA_CANNOT_BE_EMPTY)
+    @Pattern(regexp = "^[A-Z]{2}-[0-9]{3}$", message = RCA_INFO)
     private String rca;
 
     public BoatTO() { super(); }

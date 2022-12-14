@@ -1,6 +1,6 @@
 package com.Project_N7.boat_management.repository;
+
 import com.Project_N7.boat_management.entity.Pier;
-import com.Project_N7.boat_management.to.PierTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

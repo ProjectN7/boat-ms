@@ -1,6 +1,5 @@
 package com.Project_N7.boat_management.service;
 
-import com.Project_N7.boat_management.entity.Boat;
 import com.Project_N7.boat_management.entity.Reservation;
 import com.Project_N7.boat_management.repository.ReservationRepository;
 import com.Project_N7.boat_management.rto.ReservationRTO;

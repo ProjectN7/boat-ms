@@ -1,9 +1,7 @@
 package com.Project_N7.boat_management.service;
 
-import com.Project_N7.boat_management.entity.Ticket;
 import com.Project_N7.boat_management.entity.TypeTicket;
 import com.Project_N7.boat_management.repository.TypeTicketRepository;
-import com.Project_N7.boat_management.rto.TicketRTO;
 import com.Project_N7.boat_management.rto.TypeTicketRTO;
 import com.Project_N7.boat_management.to.TypeTicketTO;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,22 +1,17 @@
 package com.Project_N7.boat_management.facade;
 
-import com.Project_N7.boat_management.entity.Boat;
-import com.Project_N7.boat_management.entity.Reservation;
-import com.Project_N7.boat_management.entity.Risposta;
-import com.Project_N7.boat_management.exception.IdException;
-import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.ReservationRTO;
-
 import com.Project_N7.boat_management.service.QuaysideService;
 import com.Project_N7.boat_management.service.ReservationService;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Set;
+
+import static com.Project_N7.boat_management.constants.Constants.*;
 
 @Service
 public class ReservationFacade {
@@ -27,43 +22,41 @@ public class ReservationFacade {
     @Autowired
     QuaysideService quaysideService;
 
-    public ReservationRTO getReservationById(Long idReservation) throws IdException {
+    public ReservationRTO getReservationById(Long idReservation) throws ErrorException {
         if (!reservationService.idReservationExist(idReservation)) { // Prima chiamata al server per vedere se il
             // l'id esiste
-            throw new IdException("Id non presente"); // Altrimenti lancio l'eccezione
+            throw new ErrorException(RESERVATION_ID_NOT_FOUND); // Altrimenti lancio l'eccezione
         }
         // Se il numero è presente vado a cercarmi le prenotazioni che lo posseggono
         return reservationService.getReservationById(idReservation);
     }
 
-    public ReservationRTO getReservationByLicencePlate(String licencePlate) throws LicencePlateException{
+    public ReservationRTO getReservationByLicencePlate(String licencePlate) throws ErrorException{
         if(!reservationService.reservationByLicencePlateExist(licencePlate)){
-            throw new LicencePlateException("Targa non presente");
+            throw new ErrorException(LICENCE_PLATE_NOT_PRESENT);
         }
         return reservationService.getReservationByLicencePlate(licencePlate);
     }
 
     public Object reservationSave(ReservationTO reservationTO) {
         Long idReservation = reservationService.reservationSave(reservationTO);
-        Risposta risp = new Risposta();
+        String resp = "";
         if (idReservation != null) {
-            risp.setResponse("Prenotazione Effettuata con successo");
+            resp = RESERVATION_MADE;
         }else {
-            risp.setResponse("La prenotazione non è stata inserita");
+            resp = RESERVATION_NOT_MADE;
         }
-        return risp;
+        return resp;
     }
 
-    public List<Long> getAllReservation() throws IdException { return reservationService.getAllReservation(); }
+    public List<Long> getAllReservation() throws ErrorException { return reservationService.getAllReservation(); }
 
     @Transactional
     public Object deleteReservationById (Long idReservation) {
-        Risposta risp = new Risposta();
         if (idReservation != null) {
             reservationService.deleteReservationById(idReservation);
-            risp.setResponse("Prenotazione cancellata con successo");
-            return risp;
+            return RESERVATION_CANCELLED;
         }
-        return "";
+        return RESERVATION_NOT_CANCELLED;
     }
 }

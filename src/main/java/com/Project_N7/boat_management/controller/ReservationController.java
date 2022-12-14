@@ -1,29 +1,24 @@
 package com.Project_N7.boat_management.controller;
 
-import java.sql.Date;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-
 import com.Project_N7.boat_management.checkerrors.CheckErrorsReservation;
-import com.Project_N7.boat_management.exception.IdException;
-import com.Project_N7.boat_management.exception.LicencePlateException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.ReservationFacade;
+import com.Project_N7.boat_management.models.ServiceResponse;
 import com.Project_N7.boat_management.repository.ReservationRepository;
 import com.Project_N7.boat_management.rto.ReservationRTO;
 import com.Project_N7.boat_management.to.ReservationTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.web.bind.annotation.*;
 
-import javax.transaction.Transactional;
 import javax.validation.Valid;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
+
+import static com.Project_N7.boat_management.constants.Constants.*;
 
 @RestController
 @CrossOrigin(origins = "*")
@@ -44,12 +39,10 @@ public class ReservationController {
         ReservationRTO reservationRTOs;
         try {
             reservationRTOs = reservationFacade.getReservationById(idReservation);
-        } catch (IdException e) {
-
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
         }
-
-        return new ResponseEntity<>(reservationRTOs,HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, reservationRTOs), HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -58,21 +51,21 @@ public class ReservationController {
         ReservationRTO reservationRTOs;
         try {
             reservationRTOs = reservationFacade.getReservationByLicencePlate(licencePlate);
-        } catch (LicencePlateException e){
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e){
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(reservationRTOs, HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationRTOs), HttpStatus.OK);
     }
 
     @CrossOrigin
     @PostMapping(value = "/reservation/reservationSave")
     public ResponseEntity<Object> reservationSave(@Valid @RequestBody ReservationTO reservationTO){
         try {
-            errors.checkExistLicencePlate(reservationTO.getLicencePlate());
-        } catch (LicencePlateException e) {
-            return new ResponseEntity<>(e.getErrorRTOList(), e.getHttpStatus());
+            errors.checkIfReservationExistForLicencePlate(reservationTO.getLicencePlate());
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, BOAT_NOT_FOUND, e.getMessage()), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(reservationFacade.reservationSave(reservationTO), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationFacade.reservationSave(reservationTO)), HttpStatus.OK);
     }
 
     @CrossOrigin
@@ -81,14 +74,13 @@ public class ReservationController {
         List<Long> reservationRTOs;
         try {
             reservationRTOs = reservationFacade.getAllReservation();
-        } catch (IdException e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.NOT_FOUND);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
         }
         if (reservationRTOs.isEmpty()) {
-            return new ResponseEntity<>("Nessuna barca presente nel database", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
         } else {
-
-            return new ResponseEntity<>(reservationRTOs,HttpStatus.OK);
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationRTOs), HttpStatus.OK);
         }
 
     }
@@ -99,10 +91,10 @@ public class ReservationController {
     public ResponseEntity<Object> deleteReservation(@RequestParam Long idReservation){
         try {
             errors.checkExistId(idReservation);
-        } catch (IdException e) {
-            return new ResponseEntity<>(e.getMessage(), e.getHttpStatus());
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(reservationFacade.deleteReservationById(idReservation), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationFacade.deleteReservationById(idReservation)), HttpStatus.OK);
     }
 
 

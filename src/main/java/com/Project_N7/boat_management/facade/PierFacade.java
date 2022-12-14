@@ -1,8 +1,7 @@
 package com.Project_N7.boat_management.facade;
 
 
-import com.Project_N7.boat_management.entity.Risposta;
-import com.Project_N7.boat_management.exception.IdException;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.PierRTO;
 import com.Project_N7.boat_management.service.PierService;
 import com.Project_N7.boat_management.to.PierTO;
@@ -11,16 +10,18 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import static com.Project_N7.boat_management.constants.Constants.*;
+
 @Service
 public class PierFacade {
 
     @Autowired
     PierService pierService;
 
-    public PierRTO getPierById(Integer idPier) throws IdException {
+    public PierRTO getPierById(Integer idPier) throws ErrorException {
         if (!pierService.idPierExist(idPier)) { // Prima chiamata al server per vedere se il
             // l'id esiste
-            throw new IdException("Id non presente"); // Altrimenti lancio l'eccezione
+            throw new ErrorException(PIER_ID_NOT_FOUND); // Altrimenti lancio l'eccezione
         }
         // Se il numero è presente vado a cercarmi i moli che lo posseggono
         return pierService.getPierById(idPier);
@@ -29,15 +30,13 @@ public class PierFacade {
 
     public Object pierSave(PierTO pierTO) {
         Integer idPier = pierService.pierSave(pierTO);
-        Risposta risp = new Risposta();
         if (idPier != null) {
-            risp.setResponse("Il molo con il nome: " + pierTO.getName() + " è stato aggiunto");
-            return risp;
+            String addOk = PIER_WITH_NAME + pierTO.getName() + ADDED_WITH_O;
+            return addOk;
         }
-        risp.setResponse("Il molo non è stato inserito");
-        return risp;
+        return PIER_ERROR;
     }
 
-    public List<Long> getAllPier() throws IdException { return pierService.getAllPier(); }
+    public List<Long> getAllPier() throws ErrorException { return pierService.getAllPier(); }
 
 }
