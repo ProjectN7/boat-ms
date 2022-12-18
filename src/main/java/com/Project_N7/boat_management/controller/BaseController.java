@@ -5,6 +5,7 @@ import com.Project_N7.boat_management.rto.ErrorRTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -21,7 +22,7 @@ public abstract class BaseController {
 
     @ExceptionHandler(JsonProcessingException.class)
     public ResponseEntity<Object> handleInvalidJson(JsonProcessingException ex) {
-        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGIO), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGE, JSON_NOT_VALID_MESSAGGE), HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -32,7 +33,12 @@ public abstract class BaseController {
             String errorMessage = error.getDefaultMessage();
             errorRtoList.add(new ErrorRTO(fieldName, errorMessage));
         });
-        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGIO, errorRtoList), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGE, errorRtoList), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<Object> handleException(HttpMessageNotReadableException e){
+        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGE, JSON_NOT_VALID_MESSAGGE), HttpStatus.BAD_REQUEST);
     }
 
 
@@ -42,7 +48,7 @@ public abstract class BaseController {
         String fieldName = ex.getName();
         String errorMessage = ex.getMessage();
         errorRtoList.add(new ErrorRTO(fieldName, errorMessage));
-        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGIO, errorRtoList), HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(new ServiceResponse(CODE_400, HttpStatus.BAD_REQUEST.name(), JSON_NOT_VALID_TITLE, JSON_NOT_VALID_MESSAGGE, errorRtoList), HttpStatus.BAD_REQUEST);
     }
 
 }

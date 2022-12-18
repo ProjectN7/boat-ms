@@ -39,10 +39,10 @@ public class TypeTicketController {
         try {
             typeTickets = typeTicketFacade.getAllTypeTicket();
         } catch (ErrorException e) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
         if (typeTickets.isEmpty()) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TYPE_TICKET_FOUND, TYPE_TICKET_FOUND, typeTickets), HttpStatus.OK);
         }

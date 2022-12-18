@@ -8,7 +8,7 @@ public abstract class Constants {
    public static final String CODE_409 = "409";
    public static final String CODE_500 = "500";
    public static final String JSON_NOT_VALID_TITLE = "Json non valido";
-   public static final String JSON_NOT_VALID_MESSAGGIO = "Si è inserito un testo JSON non valido";
+   public static final String JSON_NOT_VALID_MESSAGGE = "Si è inserito un testo JSON non valido";
    public static final String LICENCE_PLATE_NOT_PRESENT = "Targa non presente";
    public static final String EXCEPTION = "Exception";
    public static final String LICENCE_PLATE_ALREADY_PRESENT = "Esiste già una barca con questa targa";

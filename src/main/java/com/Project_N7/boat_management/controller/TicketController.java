@@ -39,7 +39,7 @@ public class TicketController {
         try {
             ticketRTOs = ticketFacade.getTicketById(idTicket);
         } catch (ErrorException e) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TICKET_NOT_FOUND, TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketRTOs), HttpStatus.OK);
     }
@@ -50,7 +50,7 @@ public class TicketController {
         try {
             ticketRTOs = ticketFacade.getTicketByLicencePlate(licencePlate);
         } catch (ErrorException e){
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketRTOs), HttpStatus.OK);
 
@@ -73,7 +73,7 @@ public class TicketController {
         try {
             errors.checkExistId(idTicket);
         } catch (ErrorException e) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_CANCELLED, TICKET_CANCELLED, ticketFacade.deleteTicketById(idTicket)), HttpStatus.OK);
 
@@ -86,10 +86,10 @@ public class TicketController {
         try {
             reservationRTOs = ticketFacade.getAllLicencePlateActive();
         } catch (ErrorException e) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.NOT_FOUND);
         }
         if (reservationRTOs.isEmpty()) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationRTOs), HttpStatus.OK);
         }

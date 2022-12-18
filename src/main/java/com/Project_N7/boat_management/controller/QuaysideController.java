@@ -33,10 +33,10 @@ public class QuaysideController {
         try {
             quaysideRTOs = quaysideFacade.getQuaysideById(pier);
         } catch (ErrorException e) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }
         if (quaysideRTOs.isEmpty()) {
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, QUAYSIDE_NOT_FOUND), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, QUAYSIDE_NOT_FOUND, QUAYSIDE_NOT_FOUND), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, quaysideRTOs), HttpStatus.OK);
         }

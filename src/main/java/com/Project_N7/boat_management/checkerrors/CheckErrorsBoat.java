@@ -30,8 +30,7 @@ public class CheckErrorsBoat {
             throw new ErrorException(error.getMessage());
         }
     }
-    public void checkInformations(String licence_plate, BoatToModifyTo boatToModifyTO)
-            throws ErrorException, IllegalArgumentException, IllegalAccessException {
+    public void checkInformations(String licence_plate, BoatToModifyTo boatToModifyTO) throws ErrorException {
 
         checkLicencePlateExist(licence_plate);
         List<ErrorRTO> errorRtoList = new ArrayList<>();
