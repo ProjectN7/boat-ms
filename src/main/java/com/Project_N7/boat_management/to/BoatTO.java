@@ -32,7 +32,7 @@ public class BoatTO {
     private String declarationOfConformity;
 
     @NotBlank(message = RCA_CANNOT_BE_EMPTY)
-    @Pattern(regexp = "^[A-Z]{2}-[0-9]{3}$", message = RCA_INFO)
+    @Pattern(regexp = "", message = RCA_INFO)
     private String rca;
 
     public BoatTO() { super(); }

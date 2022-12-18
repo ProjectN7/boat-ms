@@ -23,7 +23,6 @@ import static com.Project_N7.boat_management.constants.Constants.*;
 @RestController
 @CrossOrigin(origins = "*")
 public class ReservationController {
-
     @Autowired
     private ReservationFacade reservationFacade;
 
@@ -85,6 +84,23 @@ public class ReservationController {
 
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/boat/LicencePlateActive")
+    public ResponseEntity<Object> getAllLicencePlateActive() {
+        List<String> reservationRTOs;
+        try {
+            reservationRTOs = reservationFacade.getAllLicencePlateActive();
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+        if (reservationRTOs.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationRTOs), HttpStatus.OK);
+        }
+
+    }
+
 
     @CrossOrigin
     @GetMapping(path = "/reservation/reservationDelete")
@@ -104,7 +120,6 @@ public class ReservationController {
         String ldt = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         reservationRepository.updateReservation(ldt);
     }
-
 
     /*
     @GetMapping(value = "/boat/getDate")

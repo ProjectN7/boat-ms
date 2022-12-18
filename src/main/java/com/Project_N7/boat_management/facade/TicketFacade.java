@@ -46,6 +46,9 @@ public class TicketFacade {
 
     public List<Long> getAllTicket() throws ErrorException { return ticketService.getAllTicket(); }
 
+    public List<String> getAllLicencePlateActive() throws ErrorException { return ticketService.getAllLicencePlateActive(); }
+
+
     @Transactional
     public Object deleteTicketById (Long idTicket) {
         if (idTicket != null) {
@@ -54,6 +57,9 @@ public class TicketFacade {
         }
         return TICKET_NOT_CANCELLED;
     }
+
+
+
 
 
 

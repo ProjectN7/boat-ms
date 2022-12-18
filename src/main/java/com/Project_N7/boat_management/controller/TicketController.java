@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+import java.util.List;
+
 import static com.Project_N7.boat_management.constants.Constants.*;
 
 @RestController
@@ -60,7 +62,7 @@ public class TicketController {
         try {
             errors.checkExistLicencePlate(ticketTO.getLicencePlate(), ticketTO.getIdTypeTicket());
         } catch (ErrorException e) {
-        return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.CONFLICT.name(), EXCEPTION, GENERIC_ERROR, e.getErrorRTO()), HttpStatus.CONFLICT);
+        return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.CONFLICT.name(), EXCEPTION, TICKET_ALREADY_PRESENT, e.getErrorRTO()), HttpStatus.CONFLICT);
         }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketFacade.ticketSave(ticketTO)), HttpStatus.OK);
     }
@@ -77,5 +79,20 @@ public class TicketController {
 
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/ticket/LicencePlateActive")
+    public ResponseEntity<Object> getAllLicencePlateActive() {
+        List<String> reservationRTOs;
+        try {
+            reservationRTOs = ticketFacade.getAllLicencePlateActive();
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+        if (reservationRTOs.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationRTOs), HttpStatus.OK);
+        }
 
+    }
 }

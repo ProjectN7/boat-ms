@@ -23,8 +23,8 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Reservation getReservationByLicencePlate(String licencePlate);
 
     //Da vedere
-    @Query("SELECT r.idReservation" + " FROM Reservation r" + " WHERE r.isActive = 1")
-    List<Reservation> getAllReservationActive();
+    @Query("SELECT r.licencePlate" + " FROM Reservation r" + " WHERE r.isActive = 1")
+    List<String> getAllLicencePlateActive();
 
     @Modifying(clearAutomatically = true,flushAutomatically = true)
     @Query("UPDATE Reservation SET isActive = 0 WHERE idReservation = ?1")

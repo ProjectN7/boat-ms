@@ -21,7 +21,7 @@ public class Ticket {
     @Column(name = "ID_TYPETICKET")
     private Integer idTypeTicket;
 
-    @Column (name = "Descrizione")
+    @Column (name = "Description")
     private String description;
 
     @Column (name = "isActive")

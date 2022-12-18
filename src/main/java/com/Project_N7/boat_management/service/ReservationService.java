@@ -80,4 +80,11 @@ public class ReservationService {
 
 
     public boolean reservationByLicencePlateExist(String licencePlate) { return (reservationRepository.getReservationByLicencePlate(licencePlate) !=null); }
+
+
+    public List<String> getAllLicencePlateActive() { return reservationRepository.getAllLicencePlateActive(); }
+
+
+
 }
+

@@ -59,6 +59,9 @@ public class TicketService {
 
     public List<Long> getAllTicket() { return ticketRepository.getAllTicket(); }
 
+    public List<String> getAllLicencePlateActive() { return ticketRepository.getAllLicencePlateActive(); }
+
+
     public void deleteTicketById(Long idTicket) { ticketRepository.deleteTicketById(idTicket); }
 
     public TicketRTO getTicketByLicencePlate(String licencePlate) { return populateTicketRTO(ticketRepository.getTicketByLicencePlate(licencePlate)); }

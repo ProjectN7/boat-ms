@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -19,7 +20,7 @@ import static com.Project_N7.boat_management.constants.Constants.*;
 
 
 @RestController
-@CrossOrigin(origins = "")
+@CrossOrigin(origins = "*")
 public class TypeTicketController {
 
     @Autowired
