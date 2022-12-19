@@ -1,6 +1,7 @@
 package com.Project_N7.boat_management.controller;
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsQuayside;
+import com.Project_N7.boat_management.entity.Quayside;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.QuaysideFacade;
 import com.Project_N7.boat_management.models.ServiceResponse;
@@ -29,7 +30,7 @@ public class QuaysideController {
     @CrossOrigin
     @GetMapping(value = "/quayside/quaysideAllList")
     public ResponseEntity<Object> getQuaysideFromId(@RequestParam Long pier) {
-        List<String> quaysideRTOs;
+        List<Quayside> quaysideRTOs;
         try {
             quaysideRTOs = quaysideFacade.getQuaysideById(pier);
         } catch (ErrorException e) {

@@ -1,5 +1,7 @@
 package com.Project_N7.boat_management.facade;
 
+import com.Project_N7.boat_management.controller.QuaysideController;
+import com.Project_N7.boat_management.entity.Quayside;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.service.QuaysideService;
 import com.Project_N7.boat_management.to.QuaysideTO;
@@ -16,7 +18,7 @@ public class QuaysideFacade {
     @Autowired
     QuaysideService quaysideService;
 
-    public List<String> getQuaysideById(Long pier) throws ErrorException {
+    public List<Quayside> getQuaysideById(Long pier) throws ErrorException {
         if (!quaysideService.idQuaysideExist(pier)) { // Prima chiamata al server per vedere se il
             // l'id esiste
             throw new ErrorException(QUAYSIDE_ID_NOT_FOUND); // Altrimenti lancio l'eccezione

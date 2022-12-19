@@ -1,6 +1,7 @@
 package com.Project_N7.boat_management.facade;
 
 
+import com.Project_N7.boat_management.entity.Pier;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.PierRTO;
 import com.Project_N7.boat_management.service.PierService;
@@ -37,6 +38,6 @@ public class PierFacade {
         return PIER_ERROR;
     }
 
-    public List<Long> getAllPier() throws ErrorException { return pierService.getAllPier(); }
+    public List<Pier> getAllPier() throws ErrorException { return pierService.getAllPier(); }
 
 }

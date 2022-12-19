@@ -1,6 +1,7 @@
 package com.Project_N7.boat_management.controller;
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsBoat;
+import com.Project_N7.boat_management.entity.Pier;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.PierFacade;
 import com.Project_N7.boat_management.models.ServiceResponse;
@@ -29,7 +30,7 @@ public class PierController {
     @CrossOrigin
     @GetMapping(value = "/pier/pierAllList")
     public ResponseEntity<Object> getAllPier() {
-        List<Long> pierRTOs;
+        List<Pier> pierRTOs;
         try {
             pierRTOs = pierFacade.getAllPier();
         } catch (ErrorException e) {
