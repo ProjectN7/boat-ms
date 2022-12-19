@@ -19,7 +19,7 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     Reservation getReservationByIds(Long ids);
 
     //Da vedere
-    @Query("SELECT r FROM Reservation r WHERE r.licencePlate = ?1")
+    @Query("SELECT r FROM Reservation r WHERE r.licencePlate = ?1 AND r.isActive = 1")
     Reservation getReservationByLicencePlate(String licencePlate);
 
     //Da vedere
