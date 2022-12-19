@@ -30,7 +30,7 @@ public class PierController {
     @CrossOrigin
     @GetMapping(value = "/pier/pierAllList")
     public ResponseEntity<Object> getAllPier() {
-        List<Pier> pierRTOs;
+        List<Long> pierRTOs;
         try {
             pierRTOs = pierFacade.getAllPier();
         } catch (ErrorException e) {

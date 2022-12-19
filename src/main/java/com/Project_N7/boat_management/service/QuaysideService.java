@@ -56,7 +56,7 @@ public class QuaysideService {
 
     public List<Long> getAllQuayside() { return quaysideRepository.getAllQuayside(); }
 
-    public List<Quayside> getAllQuaysideByIdPier(Long pier) { return quaysideRepository.getQuaysideById(pier); }
+    public List<String> getAllQuaysideByIdPier(Long pier) { return quaysideRepository.getQuaysideById(pier); }
 
 
 }

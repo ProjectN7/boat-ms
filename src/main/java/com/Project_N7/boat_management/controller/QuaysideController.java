@@ -5,6 +5,7 @@ import com.Project_N7.boat_management.entity.Quayside;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.QuaysideFacade;
 import com.Project_N7.boat_management.models.ServiceResponse;
+import com.Project_N7.boat_management.rto.QuaysideRTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +31,7 @@ public class QuaysideController {
     @CrossOrigin
     @GetMapping(value = "/quayside/quaysideAllList")
     public ResponseEntity<Object> getQuaysideFromId(@RequestParam Long pier) {
-        List<Quayside> quaysideRTOs;
+        List<String> quaysideRTOs;
         try {
             quaysideRTOs = quaysideFacade.getQuaysideById(pier);
         } catch (ErrorException e) {

@@ -38,6 +38,6 @@ public class PierFacade {
         return PIER_ERROR;
     }
 
-    public List<Pier> getAllPier() throws ErrorException { return pierService.getAllPier(); }
+    public List<Long> getAllPier() throws ErrorException { return pierService.getAllPier(); }
 
 }

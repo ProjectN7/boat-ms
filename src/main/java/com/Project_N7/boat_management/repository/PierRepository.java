@@ -8,11 +8,9 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface PierRepository extends JpaRepository<Pier, Integer> {
-    @Query("SELECT Pier FROM Reservation where isActive = 0 AND dateTimeFrom = ?1 AND dateTimeTo = ?1 ")
-    List<Pier> getAllPier();
+    @Query("SELECT p.idPier FROM Pier p")
+    List<Long> getAllPier();
 
     @Query("SELECT p.idPier FROM Pier p WHERE p.idPier = ?1")
     Pier getPierById(int idPier);
-
-
 }
