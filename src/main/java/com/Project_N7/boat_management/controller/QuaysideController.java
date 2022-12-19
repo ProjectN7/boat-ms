@@ -44,4 +44,21 @@ public class QuaysideController {
         }
     }
 
+
+    @CrossOrigin
+    @GetMapping(value = "/quayside/quaysideAllListActive")
+    public ResponseEntity<Object> getAllQuaysideActive(@RequestParam String dateTimeFrom, String dateTimeTo) {
+        List<String> quaysideRTOs;
+        try {
+            quaysideRTOs = quaysideFacade.getAllQuaysideActive(dateTimeFrom, dateTimeTo);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        if (quaysideRTOs.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, QUAYSIDE_NOT_FOUND, QUAYSIDE_NOT_FOUND), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, quaysideRTOs), HttpStatus.OK);
+        }
+    }
+
 }

@@ -31,8 +31,6 @@ public class BoatTO {
     @Pattern(regexp = "^[A-Z]{6}-[0-9]{3}$", message = DECLARATION_OF_CONFORMITY_INFO)
     private String declarationOfConformity;
 
-    @NotBlank(message = RCA_CANNOT_BE_EMPTY)
-    @Pattern(regexp = "", message = RCA_INFO)
     private String rca;
 
     public BoatTO() { super(); }

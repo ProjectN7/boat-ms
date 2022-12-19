@@ -46,7 +46,7 @@ public class BoatController {
         } catch (ErrorException e) {
             return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.CONFLICT.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.CONFLICT);
         }
-        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, boatFacade.boatSave(boatTO)), HttpStatus.OK);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), REGISTRATION_MADE, REGISTRATION_MADE, boatFacade.boatSave(boatTO)), HttpStatus.OK);
     }
     @CrossOrigin
     @PostMapping(path = "/modificaBoat/{licencePlate}")

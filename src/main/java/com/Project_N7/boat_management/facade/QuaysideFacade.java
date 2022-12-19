@@ -39,4 +39,8 @@ public class QuaysideFacade {
 
     public List<Long> getAllQuayside() throws ErrorException { return quaysideService.getAllQuayside(); }
 
+    public List<String> getAllQuaysideActive(String dateTimeFrom, String dateTimeTo) throws ErrorException { return quaysideService.getAllQuaysideActive(dateTimeFrom, dateTimeTo); }
+
+
+
 }

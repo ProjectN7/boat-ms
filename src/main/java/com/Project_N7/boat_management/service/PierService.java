@@ -65,4 +65,6 @@ public class PierService {
 
     public List<Long> getAllPier() { return pierRepository.getAllPier(); }
 
+    public List<String> getPierbyQuaysideActive(String quayside) { return pierRepository.getPierbyQuaysideActive(quayside); }
+
 }

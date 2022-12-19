@@ -13,4 +13,9 @@ public interface PierRepository extends JpaRepository<Pier, Integer> {
 
     @Query("SELECT p.idPier FROM Pier p WHERE p.idPier = ?1")
     Pier getPierById(int idPier);
+
+    @Query("SELECT p.name FROM Pier p WHERE p.idPier IN" +
+            "(SELECT q.pier FROM Quayside q WHERE q.name = ?1)")
+    List<String> getPierbyQuaysideActive(String quayside);
+
 }

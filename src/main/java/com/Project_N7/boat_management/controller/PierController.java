@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -33,6 +34,23 @@ public class PierController {
         List<Long> pierRTOs;
         try {
             pierRTOs = pierFacade.getAllPier();
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        if (pierRTOs.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, PIER_NOT_FOUND, PIER_NOT_FOUND), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), PIER_FOUND, PIER_FOUND, pierRTOs), HttpStatus.OK);
+        }
+
+    }
+
+    @CrossOrigin
+    @GetMapping(value = "/pier/getPierByQuaysideActive")
+    public ResponseEntity<Object> getAllPier(@RequestParam String quayside) {
+        List<String> pierRTOs;
+        try {
+            pierRTOs = pierFacade.getPierbyQuaysideActive(quayside);
         } catch (ErrorException e) {
             return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
         }

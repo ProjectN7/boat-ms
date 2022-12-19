@@ -40,4 +40,6 @@ public class PierFacade {
 
     public List<Long> getAllPier() throws ErrorException { return pierService.getAllPier(); }
 
+    public List<String> getPierbyQuaysideActive(String quayside) throws ErrorException { return pierService.getPierbyQuaysideActive(quayside); }
+
 }

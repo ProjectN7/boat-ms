@@ -22,4 +22,9 @@ public interface QuaysideRepository extends JpaRepository<Quayside, Long> {
     @Query("SELECT q.idQuayside FROM Quayside q WHERE q.idQuayside = ?1")
     Quayside getQuaysideByIdToChange(Long idQuayside);
 
+    @Query(value = "SELECT NAME FROM QUAYSIDE WHERE NAME NOT IN " +
+            "(SELECT QUAYSIDE FROM RESERVATION WHERE IS_ACTIVE = 1 " +
+            "AND DATETIME_FROM >= ?1 AND DATETIME_TO <= ?2)", nativeQuery = true)
+    List<String> getAllQuaysideActive(String dateTimeFrom, String dateTimeTo);
+
 }
