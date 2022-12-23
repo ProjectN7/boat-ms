@@ -9,6 +9,5 @@ public class CheckErrorsTypeTicket {
     @Autowired
     private TypeTicketService typeTicketService;
 
-    /* Maybe remove all class (Melone Frocio non mette le regex a FE) */
 
 }

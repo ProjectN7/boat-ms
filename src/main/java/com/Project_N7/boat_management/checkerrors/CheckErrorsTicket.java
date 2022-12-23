@@ -21,7 +21,7 @@ public class CheckErrorsTicket {
         if (!ticketService.getIdTicketSameIdTypeTicket(licencePlate, idTypeTicket).isEmpty()) {
          error.setMessage(TICKET_ALREADY_PRESENT);
         }
-        /*Cambiare dependecies aggiungere le StringUtils*/
+
         if (StringUtils.isNotBlank(error.getMessage())) {
             throw new ErrorException(error.getMessage());
         }

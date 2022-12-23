@@ -10,6 +10,5 @@ public class CheckErrorsQuayside {
     @Autowired
     private QuaysideService quaysideService;
 
-    /* Maybe remove all class (Paolo Merda) */
 
 }
