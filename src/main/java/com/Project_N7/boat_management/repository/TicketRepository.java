@@ -1,6 +1,7 @@
 package com.Project_N7.boat_management.repository;
 
 import com.Project_N7.boat_management.entity.Ticket;
+import com.Project_N7.boat_management.rto.TicketRTO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -20,7 +21,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     void deleteTicketById(Long id);
 
     @Query("SELECT t FROM Ticket t WHERE t.licencePlate = ?1 AND t.isActive = 1")
-    Ticket getTicketByLicencePlate (String licencePlate);
+    List<Ticket> getTicketByLicencePlate (String licencePlate);
 
     @Query("SELECT t FROM Ticket t")
     List<Long> getAllTicket();

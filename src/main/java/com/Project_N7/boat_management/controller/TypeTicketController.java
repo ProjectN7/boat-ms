@@ -9,10 +9,7 @@ import com.Project_N7.boat_management.repository.TypeTicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -45,6 +42,22 @@ public class TypeTicketController {
             return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
         } else {
             return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TYPE_TICKET_FOUND, TYPE_TICKET_FOUND, typeTickets), HttpStatus.OK);
+        }
+
+    }
+    @CrossOrigin
+    @GetMapping(value = "/ticket/getTypeTicketName")
+    public ResponseEntity<Object> getTypeTicketName(@RequestParam int idTypeTicket) {
+        String typeTicket;
+        try {
+            typeTicket = typeTicketFacade.getTypeTicketName(idTypeTicket);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
+        }
+        if (typeTicket.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TYPE_TICKET_NOT_FOUND, TYPE_TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TYPE_TICKET_FOUND, TYPE_TICKET_FOUND, typeTicket), HttpStatus.OK);
         }
 
     }

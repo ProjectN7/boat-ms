@@ -29,6 +29,7 @@ public class ServiceResponse {
         this.timestamp = LocalDateTime.now();
     }
 
+
     public String getCode() {
         return code;
     }

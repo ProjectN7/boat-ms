@@ -51,7 +51,7 @@ public class ReservationFacade {
 
     public List<Long> getAllReservation() throws ErrorException { return reservationService.getAllReservation(); }
 
-    public List<String> getAllLicencePlateActive() throws ErrorException { return reservationService.getAllLicencePlateActive(); }
+    public List<String> getAllLicencePlateActive(String cf) throws ErrorException { return reservationService.getAllLicencePlateActive(cf); }
 
     @Transactional
     public Object deleteReservationById (Long idReservation) {

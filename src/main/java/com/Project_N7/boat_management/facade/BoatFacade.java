@@ -42,6 +42,13 @@ public class BoatFacade {
 
     public List<String> getAllBoat() throws ErrorException { return boatService.getAllBoat(); }
 
+    public void boatDelete(String licencePlate) {  boatService.boatDelete(licencePlate); }
+
+
+    public List<String> getLicencePlateByCf(String cf) throws ErrorException { return boatService.getLicencePlateByCf(cf); }
+
+
+
 
 
 

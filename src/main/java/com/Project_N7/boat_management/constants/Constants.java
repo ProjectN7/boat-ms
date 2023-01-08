@@ -15,6 +15,7 @@ public abstract class Constants {
    public static final String GENERIC_ERROR = "Generic Error";
    public static final String BOAT_NOT_FOUND = "Nessuna barca presente nel database";
    public static final String BOAT_FOUND = "Barca presente nel database";
+   public static final String BOAT_DELETED = "Barca eliminata con successo";
    public static final String PIER_NOT_FOUND ="Nessun molo presente nel database";
    public static final String QUAYSIDE_NOT_FOUND ="Nessuna banchina presente nel database";
    public static final String PIER_FOUND ="Moli presente nel database";
@@ -25,6 +26,8 @@ public abstract class Constants {
    public static final String PIER_ID_NOT_FOUND ="Pier id non presente";
    public static final String QUAYSIDE_ID_NOT_FOUND ="Quayside id non presente";
    public static final String RESERVATION_ID_NOT_FOUND ="Reservation id non presente";
+
+   public static final String RESERVATION_NOT_FOUND ="Nessuna Prenotazione presente per le barca selezionata";
    public static final String TICKET_ID_NOT_FOUND ="Ticket id non presente";
    public static final String TYPE_TICKET_ID_NOT_FOUND ="Type Ticket id non presente";
    public static final String LICENCE_PLATE = "La targa: ";
@@ -47,7 +50,7 @@ public abstract class Constants {
    public static final String TYPE_TICKET_CREATED = "TypeTicket Creato con successo";
    public static final String TICKET_NOT_CREATED = "Il ticket non è stato inserito";
    public static final String TYPE_TICKET_NOT_CREATED = "Il type ticket non è stato inserito";
-   public static final String TICKET_NOT_FOUND = "Il ticket non è stato trovato";
+   public static final String TICKET_NOT_FOUND = "Nessun ticket presente per la barca selezionata";
    public static final String RESERVATION_ALREADY_PRESENT =   "Esiste già una prenotazione con questa targa";
    public static final String ID_NULL = "Non può essere inserito un id nullo nella lista";
    public static final String RESERVATION_WITH_LICENCE_PLATE = "La Prenotazione con la targa: ";

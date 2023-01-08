@@ -16,4 +16,7 @@ public interface TypeTicketRepository extends JpaRepository<TypeTicket, Integer>
     @Query("SELECT ty FROM TypeTicket ty WHERE ty.idTypeTicket = ?1")
     TypeTicket getTypeTicketById(Integer id);
 
+    @Query("SELECT t.description FROM TypeTicket t WHERE t.idTypeTicket = ?1")
+    String getTypeTicketName(int idTypeTicket);
+
 }

@@ -1,5 +1,6 @@
 package com.Project_N7.boat_management.facade;
 
+import com.Project_N7.boat_management.entity.Ticket;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.rto.TicketRTO;
 import com.Project_N7.boat_management.service.TicketService;
@@ -26,7 +27,7 @@ public class TicketFacade {
         return ticketService.getTicketById(idTicket);
     }
 
-    public TicketRTO getTicketByLicencePlate(String licencePlate) throws ErrorException{
+    public List<Ticket> getTicketByLicencePlate(String licencePlate) throws ErrorException{
         if(!ticketService.ticketByLicencePlateExist(licencePlate)){
             throw new ErrorException(LICENCE_PLATE_NOT_PRESENT);
         }

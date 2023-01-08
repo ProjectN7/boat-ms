@@ -80,4 +80,35 @@ public class BoatController {
 
     }
 
+    @CrossOrigin
+    @GetMapping(value = "/boat/getLicencePlateByCf")
+    public ResponseEntity<Object> getLicencePlateByCf(@RequestParam String cf) {
+        List<String> boatRTOs;
+        try {
+            boatRTOs = boatFacade.getLicencePlateByCf(cf);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_500, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        if (boatRTOs.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), BOAT_FOUND, BOAT_FOUND, boatRTOs), HttpStatus.OK);
+        }
+
+    }
+
+    @CrossOrigin
+    @DeleteMapping(value = "/boat/boatDelete")
+    public ResponseEntity<Object> deleteReservation(@RequestParam String licencePlate){
+        try {
+            errors.checkLicencePlateExist(licencePlate);
+        } catch (ErrorException e) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.NOT_FOUND);
+        }
+        boatFacade.boatDelete(licencePlate);
+        return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.ACCEPTED.name(), EXCEPTION, BOAT_DELETED, BOAT_DELETED), HttpStatus.ACCEPTED);
+
+
+    }
+
 }

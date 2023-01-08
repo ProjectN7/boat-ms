@@ -51,5 +51,8 @@ public class TypeTicketService {
     }
 
     public List<TypeTicket> getAllTypeTicket() { return typeTicketRepository.getAllTypeTicket(); }
+    public String getTypeTicketName(int idTypeTicket) { return typeTicketRepository.getTypeTicketName(idTypeTicket); }
+
+
 
 }

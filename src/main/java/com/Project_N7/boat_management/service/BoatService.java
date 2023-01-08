@@ -1,6 +1,7 @@
 package com.Project_N7.boat_management.service;
 
 import com.Project_N7.boat_management.entity.Boat;
+import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.repository.BoatRepository;
 import com.Project_N7.boat_management.rto.BoatCompletaRTO;
 import com.Project_N7.boat_management.rto.BoatRTO;
@@ -111,4 +112,9 @@ public class BoatService {
     }
 
     public List<String> getAllBoat() { return boatRepository.getAllBoat(); }
+
+    public void boatDelete(String licencePlate) { boatRepository.boatDelete(licencePlate); }
+
+    public List<String> getLicencePlateByCf(String cf) throws ErrorException { return boatRepository.getLicencePlateByCf(cf); }
+
 }

@@ -51,7 +51,7 @@ public class ReservationController {
         try {
             reservationRTOs = reservationFacade.getReservationByLicencePlate(licencePlate);
         } catch (ErrorException e){
-            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, RESERVATION_NOT_FOUND, RESERVATION_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationRTOs), HttpStatus.OK);
     }
@@ -86,10 +86,10 @@ public class ReservationController {
 
     @CrossOrigin
     @GetMapping(value = "/boat/LicencePlateActive")
-    public ResponseEntity<Object> getAllLicencePlateActive() {
+    public ResponseEntity<Object> getAllLicencePlateActive(@RequestParam String cf) {
         List<String> reservationRTOs;
         try {
-            reservationRTOs = reservationFacade.getAllLicencePlateActive();
+            reservationRTOs = reservationFacade.getAllLicencePlateActive(cf);
         } catch (ErrorException e) {
             return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, e.getMessage(), e.getMessage()), HttpStatus.NOT_FOUND);
         }

@@ -2,6 +2,7 @@ package com.Project_N7.boat_management.controller;
 
 
 import com.Project_N7.boat_management.checkerrors.CheckErrorsTicket;
+import com.Project_N7.boat_management.entity.Ticket;
 import com.Project_N7.boat_management.exception.ErrorException;
 import com.Project_N7.boat_management.facade.TicketFacade;
 import com.Project_N7.boat_management.models.ServiceResponse;
@@ -46,11 +47,14 @@ public class TicketController {
     @CrossOrigin
     @GetMapping(value = "/ticket/reservationListLicencePlate")
     public ResponseEntity<Object> getReservationFromLicencePlate(@RequestParam String licencePlate) {
-        TicketRTO ticketRTOs;
+        List<Ticket> ticketRTOs;
         try {
             ticketRTOs = ticketFacade.getTicketByLicencePlate(licencePlate);
         } catch (ErrorException e){
             return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, BOAT_NOT_FOUND, BOAT_NOT_FOUND), HttpStatus.NOT_FOUND);
+        }
+        if (ticketRTOs.isEmpty()) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_404, HttpStatus.NOT_FOUND.name(), EXCEPTION, TICKET_NOT_FOUND, TICKET_NOT_FOUND), HttpStatus.NOT_FOUND);
         }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), TICKET_FOUND, TICKET_FOUND, ticketRTOs), HttpStatus.OK);
 

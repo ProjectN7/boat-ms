@@ -39,5 +39,8 @@ public class TypeTicketFacade {
 
     public List<TypeTicket> getAllTypeTicket() throws ErrorException { return typeTicketService.getAllTypeTicket(); }
 
+    public String getTypeTicketName(int idTypeTicket) throws  ErrorException { return typeTicketService.getTypeTicketName(idTypeTicket); }
+
+
 
 }
