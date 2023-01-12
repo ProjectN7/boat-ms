@@ -35,36 +35,32 @@ public class CheckErrorsBoat {
         checkLicencePlateExist(licence_plate);
         List<ErrorRTO> errorRtoList = new ArrayList<>();
 
-        if (boatToModifyTO.getName() != null && !boatToModifyTO.getName().matches("^[a-z A-Z]+$")) {
+        if (boatToModifyTO.getName() == null) {
             errorRtoList.add(new ErrorRTO("Name", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getColour() != null && !boatToModifyTO.getColour().matches("^[a-z A-Z]+$")) {
+        if (boatToModifyTO.getColour() == null) {
             errorRtoList.add(new ErrorRTO("Colour", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getNavigationLicence() != null && !boatToModifyTO.getNavigationLicence().matches("^[A-Z]{2}-[0-9]{4}$")) {
+        if (boatToModifyTO.getNavigationLicence() == null && !boatToModifyTO.getNavigationLicence().matches("^[A-Z]{2}-[0-9]{4}$")) {
             errorRtoList.add(new ErrorRTO("Navigation Licence", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getPower() != null && !boatToModifyTO.getPower().matches("^[0-9]{3}$")) {
+        if (boatToModifyTO.getPower() == null && !boatToModifyTO.getPower().matches("^[0-9]{3}$")) {
             errorRtoList.add(new ErrorRTO("Power", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getDeclarationOfConformity() != null
+        if (boatToModifyTO.getDeclarationOfConformity() == null
                 && !boatToModifyTO.getDeclarationOfConformity().matches("^[A-Z]{6}-[0-9]{3}$")) {
             errorRtoList.add(new ErrorRTO("Declaration of conformity", "Campo non valido"));
         }
 
-        if (boatToModifyTO.getRca() != null
+        if (boatToModifyTO.getRca() == null
                 && !boatToModifyTO.getRca().matches("^[A-Z]{2}-[0-9]{3}$")) {
             errorRtoList.add(new ErrorRTO("RCA", "Campo non valido"));
         }
 
-        if (!CollectionUtils.isEmpty(errorRtoList)) {
-            throw new ErrorException(errorRtoList);
-
-        }
     }
 
     public void checkLicencePlateExist(String licence_plate) throws ErrorException {

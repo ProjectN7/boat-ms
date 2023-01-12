@@ -29,7 +29,7 @@ public interface TicketRepository extends JpaRepository<Ticket, Long> {
     @Query("SELECT t.licencePlate FROM Ticket t WHERE t.isActive = 1")
     List<String> getAllLicencePlateActive();
 
-    @Query(value = "SELECT idTicket FROM Ticket WHERE licencePlate = ?1 AND idTypeTicket = ?2")
+    @Query(value = "SELECT idTicket FROM Ticket WHERE licencePlate = ?1 AND isActive = 1")
     List<Integer> getIdTicketSameIdTypeTicket(String licencePlate, Integer idTypeTicket);
 
 }

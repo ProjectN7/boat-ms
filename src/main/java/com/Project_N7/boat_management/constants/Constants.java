@@ -13,7 +13,10 @@ public abstract class Constants {
    public static final String EXCEPTION = "Exception";
    public static final String LICENCE_PLATE_ALREADY_PRESENT = "Esiste già una barca con questa targa";
    public static final String GENERIC_ERROR = "Generic Error";
-   public static final String BOAT_NOT_FOUND = "Nessuna barca presente nel database";
+   public static final String BOAT_NOT_FOUND = "Non hai registrato ancora nessuna barca";
+
+   public static final String DATE_NOT_VALID = "Intervallo Data inizio e Data fine non valido, seleziona un intervallo date valido";
+
    public static final String BOAT_FOUND = "Barca presente nel database";
    public static final String BOAT_DELETED = "Barca eliminata con successo";
    public static final String PIER_NOT_FOUND ="Nessun molo presente nel database";

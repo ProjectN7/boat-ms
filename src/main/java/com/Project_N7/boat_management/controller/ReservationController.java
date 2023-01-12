@@ -64,6 +64,9 @@ public class ReservationController {
         } catch (ErrorException e) {
             return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, BOAT_NOT_FOUND, e.getMessage()), HttpStatus.CONFLICT);
         }
+        if (reservationTO.getDateTimeFrom().after(reservationTO.getDateTimeTo())) {
+            return new ResponseEntity<>(new ServiceResponse(CODE_409, HttpStatus.INTERNAL_SERVER_ERROR.name(), EXCEPTION, DATE_NOT_VALID, DATE_NOT_VALID), HttpStatus.CONFLICT);
+        }
         return new ResponseEntity<>(new ServiceResponse(CODE_200, HttpStatus.OK.name(), QUAYSIDE_FOUND, QUAYSIDE_FOUND, reservationFacade.reservationSave(reservationTO)), HttpStatus.OK);
     }
 

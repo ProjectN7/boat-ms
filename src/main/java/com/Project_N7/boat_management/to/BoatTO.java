@@ -13,7 +13,6 @@ public class BoatTO {
     @NotBlank(message = CF_CANNOT_BE_EMPTY)
     @Pattern(regexp = "[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]", message = CF_INFO)
     private String cf;
-    @Pattern(regexp = "^[a-z A-Z]+$", message = NAME_INFO)
     private String name;
 
     @Pattern(regexp = "^[a-z A-Z]+$", message = NAME_INFO)
